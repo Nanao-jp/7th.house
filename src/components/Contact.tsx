@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useForm, SubmitHandler } from 'react-hook-form'
+import Button from '@/components/ui/Button'
 
 interface IFormInput {
   name: string
@@ -78,14 +79,13 @@ const Contact = () => {
             )}
           </div>
           
-          <motion.button
+          <Button
             type="submit"
-            className="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition-colors"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+            variant="primary"
+            className="w-full py-3"
           >
             送信する
-          </motion.button>
+          </Button>
         </motion.form>
       </div>
     </section>

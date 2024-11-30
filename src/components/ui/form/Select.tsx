@@ -1,21 +1,23 @@
 "use client"
 
-import { InputHTMLAttributes } from 'react'
+import { SelectHTMLAttributes } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   error?: string
   label?: string
   required?: boolean
+  options: { value: string; label: string }[]
 }
 
-const Input = ({ 
+const Select = ({ 
   className,
   error,
   label,
   required,
+  options,
   ...props 
-}: InputProps) => {
+}: SelectProps) => {
   return (
     <div className="space-y-1">
       {label && (
@@ -24,7 +26,7 @@ const Input = ({
           {required && <span className="text-red-500 ml-1">*</span>}
         </label>
       )}
-      <input
+      <select
         className={twMerge(
           'w-full px-4 py-2 bg-white/5 text-white rounded-lg border transition-colors focus:outline-none focus:ring-2',
           error 
@@ -33,7 +35,17 @@ const Input = ({
           className
         )}
         {...props}
-      />
+      >
+        {options.map(option => (
+          <option 
+            key={option.value} 
+            value={option.value}
+            className="bg-gray-900 text-white"
+          >
+            {option.label}
+          </option>
+        ))}
+      </select>
       {error && (
         <p className="text-red-500 text-sm mt-1">{error}</p>
       )}
@@ -41,4 +53,4 @@ const Input = ({
   )
 }
 
-export default Input 
+export default Select 

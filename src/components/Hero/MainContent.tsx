@@ -18,11 +18,11 @@ const MainContent = () => {
             500,
             'AIが導く、',
             1000,
-            'AIが導く、\n次世代のWeb開発',
+            'AIが導く、次世代のWeb開発',
           ]}
           wrapper="h1"
           speed={50}
-          className="relative inline-block whitespace-pre-line"
+          className="relative inline-block"
           cursor={true}
           repeat={0}
         />

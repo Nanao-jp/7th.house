@@ -21,11 +21,13 @@ const Layout = ({ children }: LayoutProps) => {
       variants={fadeIn}
       initial="initial"
       animate="animate"
-      className="min-h-screen relative overflow-hidden"
+      className="min-h-screen relative overflow-hidden bg-gray-900"
     >
-      <TextureBackground />
-      <GradientBackground mousePosition={mousePosition} />
-      <LightEffects />
+      <div className="fixed inset-0 pointer-events-none">
+        <TextureBackground />
+        <GradientBackground mousePosition={mousePosition} />
+        <LightEffects />
+      </div>
 
       <div className="relative z-10">
         <Navbar />

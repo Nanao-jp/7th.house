@@ -7,9 +7,20 @@ import Container from './Container'
 interface SectionProps extends Omit<HTMLMotionProps<"section">, 'children'> {
   children?: ReactNode
   id?: string
+  disableDefaultBackground?: boolean
+  fullWidth?: boolean
 }
 
-const Section = ({ children, className, id, ...props }: SectionProps) => {
+const Section = ({ 
+  children, 
+  className, 
+  id, 
+  disableDefaultBackground = false,
+  fullWidth = false,
+  ...props 
+}: SectionProps) => {
+  const content = fullWidth ? children : <Container>{children}</Container>;
+
   return (
     <motion.section
       id={id}
@@ -17,12 +28,14 @@ const Section = ({ children, className, id, ...props }: SectionProps) => {
       initial="initial"
       whileInView="animate"
       viewport={{ once: true }}
-      className={twMerge('py-16', className)}
+      className={twMerge(
+        'py-16 relative',
+        disableDefaultBackground && 'bg-transparent',
+        className
+      )}
       {...props}
     >
-      <Container>
-        {children}
-      </Container>
+      {content}
     </motion.section>
   )
 }
