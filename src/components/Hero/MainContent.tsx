@@ -8,7 +8,7 @@ const MainContent = () => {
   return (
     <div className="relative rounded-lg p-10 backdrop-blur-[2px] bg-white/[0.02] flex flex-col justify-center items-center gap-8 md:gap-12 lg:gap-16">
       <motion.div 
-        className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white tracking-tight relative text-center"
+        className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white tracking-tight relative text-center leading-tight"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
@@ -18,11 +18,11 @@ const MainContent = () => {
             500,
             'AIが導く、',
             1000,
-            'AIが導く、次世代のWeb開発',
+            'AIが導く、\n次世代のWeb開発',
           ]}
           wrapper="h1"
           speed={50}
-          className="relative inline-block"
+          className="relative inline-block whitespace-pre-line"
           cursor={true}
           repeat={0}
         />

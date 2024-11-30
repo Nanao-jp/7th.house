@@ -113,8 +113,12 @@ const DemoSection = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl font-bold text-white mb-4">あなたのビジネスに最適なウェブサイトを</h2>
-          <p className="text-gray-300 text-lg">業種や特徴を選択して、AIによる提案を体験してください</p>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight">
+            あなたのビジネスに<br className="sm:hidden" />最適なウェブサイトを
+          </h2>
+          <p className="text-base md:text-lg text-gray-300">
+            業種や特徴を選択して、AIによる提案を体験してください
+          </p>
         </motion.div>
 
         <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 md:p-8 shadow-2xl">
