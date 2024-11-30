@@ -1,9 +1,23 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Space_Grotesk, Orbitron, M_PLUS_1 } from "next/font/google";
 import "./globals.css";
 import Layout from '@/components/Layout'
 
-const inter = Inter({ subsets: ["latin"] });
+const spaceGrotesk = Space_Grotesk({ 
+  subsets: ["latin"],
+  variable: '--font-space-grotesk',
+});
+
+const orbitron = Orbitron({ 
+  subsets: ["latin"],
+  variable: '--font-orbitron',
+});
+
+const mplus = M_PLUS_1({ 
+  subsets: ["latin"],
+  variable: '--font-mplus',
+  weight: ['300', '500', '700'],
+});
 
 export const metadata: Metadata = {
   title: "7th House",
@@ -17,7 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body className={inter.className}>
+      <body className={`${spaceGrotesk.variable} ${orbitron.variable} ${mplus.variable}`}>
         <Layout>
           {children}
         </Layout>

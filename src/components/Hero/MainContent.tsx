@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 
 const MainContent = () => {
   return (
-    <div className="relative rounded-lg p-6 sm:p-8 md:p-12 lg:p-16 xl:p-20 bg-black/5 flex flex-col justify-center items-center gap-8 md:gap-12 lg:gap-16">
+    <div className="relative rounded-lg p-6 sm:p-8 md:p-12 lg:p-16 xl:p-20 backdrop-blur-[2px] bg-white/[0.02] flex flex-col justify-center items-center gap-8 md:gap-12 lg:gap-16">
       <motion.h1 
         className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white font-[family-name:var(--font-mplus)] tracking-tight relative"
         initial={{ opacity: 0, y: 20 }}
