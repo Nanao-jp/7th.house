@@ -104,7 +104,7 @@ export async function generateProposal(
         const points = text.split('\n')
           .map(line => line.trim())
           .filter(line => line.startsWith('-'))
-          .map(line => line.trim());
+          .map(line => line.slice(1).trim());
         console.log('Extracted bullet points from text:', { text, points });
         return points;
       };
