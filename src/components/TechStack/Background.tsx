@@ -1,6 +1,6 @@
 export const Background = () => {
   return (
-    <div className="absolute inset-0 overflow-hidden">
+    <div className="absolute -inset-20 overflow-hidden">
       <div className="absolute inset-0">
         <div className="absolute top-10 left-1/4 w-4 h-4 bg-blue-400 rounded-full animate-float-slow shadow-[0_0_25px_rgba(59,130,246,0.7)]" />
         <div className="absolute top-1/3 left-1/2 w-6 h-6 bg-purple-400 rounded-full animate-float-medium shadow-[0_0_35px_rgba(139,92,246,0.7)]" />

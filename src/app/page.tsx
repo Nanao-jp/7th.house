@@ -4,9 +4,7 @@ import Hero from '@/components/Hero'
 import DemoSection from '@/components/DemoSection'
 import Features from '@/components/Features'
 import Process from '@/components/Process'
-import TechStack from '@/components/TechStack'
-import Projects from '@/components/Projects'
-import Skills from '@/components/Skills'
+import TechAndFlow from '@/components/TechAndFlow'
 import Contact from '@/components/Contact'
 
 export default function Home() {
@@ -16,9 +14,7 @@ export default function Home() {
       <DemoSection />
       <Features />
       <Process />
-      <TechStack />
-      <Projects />
-      <Skills />
+      <TechAndFlow />
       <Contact />
     </>
   )
