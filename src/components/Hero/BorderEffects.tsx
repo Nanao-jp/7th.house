@@ -6,7 +6,7 @@ export const MainBorders = () => {
   return (
     <>
       <motion.div 
-        className="absolute inset-x-6 -top-20 -bottom-20 sm:inset-x-8 md:inset-x-12 lg:inset-x-16 xl:inset-x-20 border-2 border-blue-500/30 rounded-lg -skew-y-2"
+        className="absolute inset-x-8 -top-8 -bottom-8 border-2 border-blue-500/30 rounded-lg -skew-y-2"
         animate={{
           borderColor: ['rgba(59, 130, 246, 0.3)', 'rgba(168, 85, 247, 0.4)', 'rgba(236, 72, 153, 0.3)', 'rgba(59, 130, 246, 0.3)'],
           boxShadow: [
@@ -23,7 +23,7 @@ export const MainBorders = () => {
         }}
       />
       <motion.div 
-        className="absolute inset-x-6 -top-20 -bottom-20 sm:inset-x-8 md:inset-x-12 lg:inset-x-16 xl:inset-x-20 border-2 border-white/10 rounded-lg skew-y-2"
+        className="absolute inset-x-8 -top-8 -bottom-8 border-2 border-white/10 rounded-lg skew-y-2"
         animate={{
           borderColor: ['rgba(255, 255, 255, 0.1)', 'rgba(236, 72, 153, 0.2)', 'rgba(168, 85, 247, 0.2)', 'rgba(255, 255, 255, 0.1)'],
           boxShadow: [
@@ -46,7 +46,7 @@ export const MainBorders = () => {
 
 export const ShiningEffect = () => {
   return (
-    <div className="absolute -inset-4 md:-inset-6 rounded-lg overflow-hidden">
+    <div className="absolute -inset-12 rounded-lg overflow-hidden">
       {/* 上のボーダー */}
       <motion.div
         className="absolute top-0 left-[20%] h-[2px] bg-gradient-to-r from-blue-500/50 via-purple-500/50 to-pink-500/50 -rotate-2"

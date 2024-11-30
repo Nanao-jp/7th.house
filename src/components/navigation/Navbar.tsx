@@ -1,12 +1,29 @@
 "use client"
 
-import { motion } from 'framer-motion'
-import Image from 'next/image'
+import { motion, AnimatePresence } from 'framer-motion'
+import { useState } from 'react'
 import { navigationLinks } from '@/constants/navigation'
 import Container from '@/components/ui/Container'
-import { slideInFromTop, hoverScale, hoverLift } from '@/constants/animations'
+import { slideInFromTop } from '@/constants/animations'
+import Logo from './Logo'
+import HamburgerButton from './HamburgerButton'
+import MobileMenu from './MobileMenu'
+import DesktopMenu from './DesktopMenu'
 
 const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false)
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen)
+  }
+
   return (
     <nav className="fixed top-0 w-full z-50 bg-black/30 backdrop-blur-md">
       <Container className="py-4">
@@ -14,37 +31,19 @@ const Navbar = () => {
           variants={slideInFromTop}
           initial="initial"
           animate="animate"
-          className="flex justify-between items-center"
+          className="flex flex-col md:flex-row md:justify-between items-center relative"
         >
-          <motion.div 
-            variants={hoverScale}
-            whileHover="hover"
-            className="flex flex-col items-start"
-          >
-            <div className="relative w-[150px] h-[40px]">
-              <Image
-                src="/logo.jpg"
-                alt="7th.house"
-                fill
-                style={{ objectFit: 'contain' }}
-                priority
-              />
-            </div>
-          </motion.div>
+          <HamburgerButton isOpen={isOpen} onClick={toggleMenu} />
+          <Logo onClick={scrollToTop} />
+          <DesktopMenu links={navigationLinks} />
           
-          <div className="space-x-6">
-            {navigationLinks.map((link) => (
-              <motion.a
-                key={link.label}
-                href={link.href}
-                variants={hoverLift}
-                whileHover="hover"
-                className="text-white hover:text-blue-400 transition-colors"
-              >
-                {link.label}
-              </motion.a>
-            ))}
-          </div>
+          <AnimatePresence>
+            <MobileMenu 
+              isOpen={isOpen} 
+              links={navigationLinks} 
+              onLinkClick={() => setIsOpen(false)} 
+            />
+          </AnimatePresence>
         </motion.div>
       </Container>
     </nav>

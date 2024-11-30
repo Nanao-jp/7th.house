@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 
 export const ShiningBorder = () => {
   return (
-    <div className="absolute -inset-4 md:-inset-6 rounded-lg -skew-y-2 overflow-hidden">
+    <div className="absolute -inset-10 rounded-lg -skew-y-2 overflow-hidden">
       <motion.div
         className="absolute inset-0 border border-blue-500/30 rounded-lg"
         initial={{ boxShadow: '0 0 0 rgba(59, 130, 246, 0)' }}

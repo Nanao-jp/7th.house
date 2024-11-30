@@ -29,7 +29,7 @@ const Layout = ({ children }: LayoutProps) => {
 
       <div className="relative z-10">
         <Navbar />
-        <main className="pt-20">
+        <main className="pt-2.5">
           {children}
         </main>
       </div>

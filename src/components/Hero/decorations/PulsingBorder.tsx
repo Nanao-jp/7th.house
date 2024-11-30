@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 export const PulsingBorder = () => {
   return (
     <motion.div 
-      className="absolute -inset-4 md:-inset-6 border border-white/10 rounded-lg skew-y-2"
+      className="absolute -inset-10 border border-white/10 rounded-lg skew-y-2"
       initial={{ opacity: 0.5 }}
       animate={{ 
         opacity: [0.3, 0.6, 0.3],
