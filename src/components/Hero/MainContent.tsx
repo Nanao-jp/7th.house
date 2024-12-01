@@ -6,7 +6,7 @@ import ActionButton from './ActionButton'
 
 const MainContent = () => {
   return (
-    <div className="relative rounded-lg p-10 backdrop-blur-[2px] bg-white/[0.02] flex flex-col justify-center items-center gap-8 md:gap-12 lg:gap-16">
+    <div className="relative rounded-lg p-10 flex flex-col justify-center items-center gap-8 md:gap-12 lg:gap-16">
       <motion.div 
         className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white tracking-tight relative text-center leading-tight"
         initial={{ opacity: 0 }}
