@@ -5,6 +5,7 @@ import DemoSection from '@/components/DemoSection'
 import Features from '@/components/Features'
 import Process from '@/components/Process'
 import TechAndFlow from '@/components/TechAndFlow'
+import PricingPlans from '@/components/PricingPlans'
 import Contact from '@/components/Contact'
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
       <Features />
       <Process />
       <TechAndFlow />
+      <PricingPlans />
       <Contact />
     </>
   )

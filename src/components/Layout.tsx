@@ -7,7 +7,7 @@ import TextureBackground from './ui/backgrounds/TextureBackground'
 import GradientBackground from './ui/backgrounds/GradientBackground'
 import LightEffects from './ui/backgrounds/LightEffects'
 import Navbar from './navigation/Navbar'
-import { fadeIn } from '@/constants/animations'
+import { slideInFromTop } from '@/constants/animations'
 
 interface LayoutProps {
   children: ReactNode
@@ -18,7 +18,7 @@ const Layout = ({ children }: LayoutProps) => {
 
   return (
     <motion.div 
-      variants={fadeIn}
+      variants={slideInFromTop}
       initial="initial"
       animate="animate"
       className="min-h-screen relative overflow-hidden bg-gray-900"
