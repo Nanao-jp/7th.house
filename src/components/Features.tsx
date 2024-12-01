@@ -27,7 +27,12 @@ const Features = () => {
   ];
 
   return (
-    <Section className="py-20">
+    <Section 
+      id="features"
+      className="py-20"
+      disableDefaultBackground
+      fullWidth
+    >
       <motion.h2 
         {...fadeInUp}
         className="text-2xl md:text-3xl lg:text-4xl font-bold text-center text-white mb-16 leading-tight"

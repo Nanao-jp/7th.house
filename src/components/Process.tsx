@@ -41,7 +41,12 @@ const Process = () => {
   ];
 
   return (
-    <Section className="py-20">
+    <Section 
+      id="process"
+      className="py-20"
+      disableDefaultBackground
+      fullWidth
+    >
       <motion.div
         {...fadeInUp}
         className="text-center mb-16"

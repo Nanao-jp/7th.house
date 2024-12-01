@@ -125,6 +125,7 @@ const flowSteps = [
 const TechAndFlow = () => {
   return (
     <Section 
+      id="tech"
       className="py-32 md:py-40"
       disableDefaultBackground
       fullWidth

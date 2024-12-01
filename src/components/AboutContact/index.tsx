@@ -9,6 +9,7 @@ import ContactForm from './ContactForm';
 const AboutContact = () => {
   return (
     <Section
+      id="contact"
       className="pt-20 pb-4"
       disableDefaultBackground
       fullWidth

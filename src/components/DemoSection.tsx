@@ -59,6 +59,7 @@ const DemoSection = () => {
 
   return (
     <Section 
+      id="demo"
       className="min-h-screen py-20"
       disableDefaultBackground
       fullWidth

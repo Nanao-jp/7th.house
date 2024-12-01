@@ -10,7 +10,12 @@ import PricingFAQ from './pricing/PricingFAQ'
 
 const PricingPlans = () => {
   return (
-    <Section className="py-32 md:py-40" disableDefaultBackground>
+    <Section 
+      id="pricing"
+      className="py-20"
+      disableDefaultBackground
+      fullWidth
+    >
       <div className="relative">
         <div className="relative z-10 max-w-6xl mx-auto px-4">
           <motion.div {...fadeInUp} className="text-center mb-16">
