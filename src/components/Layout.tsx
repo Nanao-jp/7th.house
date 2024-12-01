@@ -8,6 +8,7 @@ import GradientBackground from './ui/backgrounds/GradientBackground'
 import LightEffects from './ui/backgrounds/LightEffects'
 import Navbar from './navigation/Navbar'
 import { slideInFromTop } from '@/constants/animations'
+import DesignAccents from './AboutContact/DesignAccents'
 
 interface LayoutProps {
   children: ReactNode
@@ -31,7 +32,10 @@ const Layout = ({ children }: LayoutProps) => {
 
       <div className="relative z-10">
         <Navbar />
-        <main className="pt-2.5">
+        <div className="absolute left-0 right-0 h-24 pointer-events-none z-20" style={{ top: '4rem' }}>
+          <DesignAccents />
+        </div>
+        <main className="pt-2.5 relative">
           {children}
         </main>
       </div>

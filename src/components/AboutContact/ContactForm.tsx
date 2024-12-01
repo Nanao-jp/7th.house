@@ -8,7 +8,6 @@ import emailjs from '@emailjs/browser';
 import ContactInfo from './ContactInfo';
 import FormInput from './FormInput';
 import Toast from '@/components/ui/Toast';
-import DesignAccents from './DesignAccents';
 
 // EmailJSの設定
 const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || '';
@@ -124,7 +123,6 @@ const ContactForm = () => {
       {...fadeInUp}
       className="max-w-6xl mx-auto pb-12 md:pb-16 relative"
     >
-      <DesignAccents />
       <div className="grid md:grid-cols-2 gap-12 md:gap-16">
         {/* お問い合わせフォーム */}
         <div>

@@ -7,6 +7,7 @@ import Process from '@/components/Process'
 import TechAndFlow from '@/components/TechAndFlow'
 import PricingPlans from '@/components/PricingPlans'
 import AboutContact from '@/components/AboutContact'
+import DesignAccents from '@/components/AboutContact/DesignAccents'
 
 export default function Home() {
   return (
@@ -18,6 +19,9 @@ export default function Home() {
       <TechAndFlow />
       <PricingPlans />
       <AboutContact />
+      <div className="h-24 relative">
+        <DesignAccents />
+      </div>
     </>
   )
 }

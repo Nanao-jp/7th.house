@@ -9,7 +9,7 @@ import ContactForm from './ContactForm';
 const AboutContact = () => {
   return (
     <Section
-      className="py-20"
+      className="pt-20 pb-4"
       disableDefaultBackground
       fullWidth
     >
