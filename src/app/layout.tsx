@@ -23,14 +23,8 @@ export const metadata: Metadata = {
   title: "7th House",
   description: "Portfolio website",
   icons: {
-    icon: [
-      { url: '/favicon.ico', sizes: '32x32' },
-      { url: '/favicon-32x32.jpg', sizes: '32x32', type: 'image/jpg' },
-    ],
-    apple: [
-      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
-    ],
-  },
+    icon: '/favicon.ico'
+  }
 }
 
 export default function RootLayout({
