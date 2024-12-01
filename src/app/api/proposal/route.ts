@@ -82,11 +82,11 @@ export async function POST(request: Request) {
     console.log('Generated proposal:', proposal);
     return NextResponse.json(proposal);
   } catch (error) {
-    console.error('Error details:', {
+    console.error('Error details:', error instanceof Error ? {
       name: error.name,
       message: error.message,
       stack: error.stack
-    });
+    } : 'Unknown error');
     
     if (error instanceof Error) {
       if (error.message === 'API rate limit exceeded') {
