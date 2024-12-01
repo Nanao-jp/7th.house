@@ -5,9 +5,6 @@ import { motion } from 'framer-motion'
 const Background = () => {
   return (
     <div className="absolute inset-0 overflow-hidden">
-      {/* 背景画像用のレイヤー */}
-      <div className="absolute inset-0 bg-[url('/images/background.jpg')] bg-cover bg-center bg-no-repeat" />
-      
       {/* オーバーレイグラデーション */}
       <motion.div 
         className="absolute inset-0 bg-gradient-to-br from-gray-900/60 via-gray-800/50 to-black/70"

@@ -1,17 +1,14 @@
 "use client"
 
 import { motion } from 'framer-motion'
-import { useRouter } from 'next/navigation'
-import { hoverLift } from '@/constants/animations'
 import type { NavigationLink, NavigationLinks } from '@/types/navigation'
+import { hoverLift } from '@/constants/animations'
 
 interface DesktopMenuProps {
   links: NavigationLinks
 }
 
 const DesktopMenu = ({ links }: DesktopMenuProps) => {
-  const router = useRouter()
-
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault()
     if (href === '/') {

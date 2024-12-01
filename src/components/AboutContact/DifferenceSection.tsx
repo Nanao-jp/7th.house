@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
-import { FaRobot, FaUserTie, FaCode, FaRocket, FaBrain } from 'react-icons/fa';
+import { FaBrain } from 'react-icons/fa';
 import { HiLightningBolt } from 'react-icons/hi';
+import { FaRocket } from 'react-icons/fa';
 import Card from '@/components/ui/Card';
 import { fadeInUp, staggerChildren } from '@/constants/animations';
 

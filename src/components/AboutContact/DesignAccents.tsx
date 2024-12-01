@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
 
 const DesignAccents = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -175,8 +174,6 @@ const DesignAccents = () => {
 
         // ゆらゆら動作（大きな振幅、低速）
         const normalizedTime = time / 30000; // 30秒で1サイクルに延長
-        const waveAmplitude = canvas.width * 0.15;
-        const verticalAmplitude = canvas.height * 0.05;
         
         // timeScaleを使用せず、直接小さな値を加算
         node.x += Math.sin(normalizedTime + node.breathPhase) * 0.1;
@@ -287,13 +284,10 @@ const DesignAccents = () => {
   }, []);
 
   return (
-    <div className="absolute left-0 right-0 bottom-0 h-24 pointer-events-none">
-      <div className="absolute inset-0 bg-[url('/dot-pattern.svg')] bg-repeat opacity-5" />
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0"
-      />
-    </div>
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 w-full h-full"
+    />
   );
 };
 

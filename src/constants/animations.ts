@@ -38,4 +38,10 @@ export const hoverLift: Variants = {
 export const transition = {
   duration: 0.3,
   ease: 'easeOut',
-} 
+}
+
+export const fadeIn: Variants = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  transition: { duration: 0.6 }
+}; 
