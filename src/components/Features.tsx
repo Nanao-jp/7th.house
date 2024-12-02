@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { FaRocket, FaChartLine, FaCogs } from 'react-icons/fa';
-import { fadeInUp, staggerChildren } from '@/constants/animations';
+import { fadeInUp } from '@/constants/animations';
 import Section from '@/components/ui/Section';
 import Card from '@/components/ui/Card';
 
@@ -33,34 +33,35 @@ const Features = () => {
       disableDefaultBackground
       fullWidth
     >
-      <motion.h2 
-        {...fadeInUp}
-        className="text-2xl md:text-3xl lg:text-4xl font-bold text-center text-white mb-16 leading-tight"
-      >
-        AIが実現する<br className="sm:hidden" />次世代の開発
-      </motion.h2>
-      
-      <motion.div 
-        {...staggerChildren()}
-        className="grid md:grid-cols-3 gap-8"
-      >
-        {features.map((feature, index) => (
-          <Card
-            key={index}
-            variant="feature"
-            withHover
-            {...fadeInUp}
-            transition={{ duration: 0.6, delay: index * 0.2 }}
-          >
-            <div className="mb-6 transform transition-transform duration-300 hover:scale-110">
-              {feature.icon}
-            </div>
-            <h3 className="text-2xl font-semibold text-white mb-4">{feature.title}</h3>
-            <p className="text-gray-300 mb-4">{feature.description}</p>
-            <p className="text-gray-400 text-sm">{feature.details}</p>
-          </Card>
-        ))}
-      </motion.div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.h2 
+          {...fadeInUp}
+          className="text-2xl md:text-3xl lg:text-4xl font-bold text-center text-white mb-16 leading-tight"
+        >
+          AIが実現する<br className="sm:hidden" />次世代の開発
+        </motion.h2>
+        
+        <motion.div 
+          {...fadeInUp}
+          transition={{ duration: 0.4 }}
+          className="grid md:grid-cols-3 gap-8"
+        >
+          {features.map((feature, index) => (
+            <Card
+              key={index}
+              variant="feature"
+              withHover
+            >
+              <div className="mb-6 transform transition-transform duration-300">
+                {feature.icon}
+              </div>
+              <h3 className="text-2xl font-semibold text-white mb-4">{feature.title}</h3>
+              <p className="text-gray-300 mb-4">{feature.description}</p>
+              <p className="text-gray-400 text-sm">{feature.details}</p>
+            </Card>
+          ))}
+        </motion.div>
+      </div>
     </Section>
   );
 };

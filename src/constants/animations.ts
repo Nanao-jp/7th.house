@@ -3,18 +3,21 @@ import { Variants } from 'framer-motion'
 export const fadeInUp: Variants = {
   initial: { opacity: 0, y: 20 },
   whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
   transition: { duration: 0.6 }
 };
 
 export const fadeInLeft: Variants = {
   initial: { opacity: 0, x: -30 },
   whileInView: { opacity: 1, x: 0 },
+  viewport: { once: true },
   transition: { duration: 0.6 }
 };
 
 export const staggerChildren = (delay: number = 0.2): Variants => ({
   initial: { opacity: 0 },
   whileInView: { opacity: 1 },
+  viewport: { once: true },
   transition: { staggerChildren: delay }
 });
 
