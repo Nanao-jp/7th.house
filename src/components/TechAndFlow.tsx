@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { FaComments, FaPencilRuler, FaRobot, FaCode, FaCheckCircle, FaDatabase } from 'react-icons/fa';
 import { SiNextdotjs, SiReact, SiTailwindcss, SiTypescript, SiFramer, SiPrisma, SiOpenai } from 'react-icons/si';
 import { TbBrandOpenai } from 'react-icons/tb';
+import { fadeInUp, staggerChildren } from '@/constants/animations';
 import Section from '@/components/ui/Section';
 import Card from '@/components/ui/Card';
 import { Background } from './TechStack/Background';
@@ -25,7 +26,7 @@ const technologies = [
       {
         name: "TailwindCSS",
         icon: <SiTailwindcss className="w-8 h-8" />,
-        description: "美しいデザインの実現"
+        description: "美しいデザインの���現"
       }
     ]
   },
@@ -131,49 +132,119 @@ const TechAndFlow = () => {
     >
       <div className="relative">
         <Background />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 max-w-6xl mx-auto px-4">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4 }}
+            {...fadeInUp}
             className="text-center mb-16"
           >
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight">
               先進技術による<br className="sm:hidden" />実現
             </h2>
             <p className="text-base md:text-lg text-gray-400 max-w-2xl mx-auto">
-              最新のWeb技術とAIを組み合わせることで、
+              最新のWeb技術とAI技術を組み合わせることで、
               高品質で革新的なソリューションを提供します
             </p>
           </motion.div>
 
           {/* Tech Stack Section */}
           <div className="mb-20">
-            <div className="grid md:grid-cols-3 gap-8">
-              {technologies.map((tech, index) => (
-                <motion.div
-                  key={tech.category}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4 }}
+            <motion.h3
+              {...fadeInUp}
+              className="text-3xl font-bold text-white mb-8 text-center"
+            >
+              使用技術
+            </motion.h3>
+            <motion.div 
+              {...staggerChildren()}
+              className="grid md:grid-cols-3 gap-8"
+            >
+              {technologies.map((category, index) => (
+                <Card
+                  key={index}
+                  variant="tech"
+                  withHover
+                  padding="large"
+                  {...fadeInUp}
+                  transition={{ duration: 0.6, delay: index * 0.2 }}
                 >
-                  <Card variant="tech" withHover>
-                    <h3 className="text-xl font-semibold text-white/90 mb-2">{tech.category}</h3>
-                    <p className="text-gray-400/90 mb-6">{tech.description}</p>
-                    <div className="space-y-4">
-                      {tech.techs.map((item) => (
-                        <div key={item.name} className="flex items-center space-x-3">
-                          <div className="text-blue-400/80">
-                            {item.icon}
+                  <h3 className="text-2xl font-semibold text-white mb-4">{category.category}</h3>
+                  <p className="text-gray-400 mb-8">{category.description}</p>
+                  
+                  <motion.div 
+                    {...staggerChildren(0.1)}
+                    className="space-y-6"
+                  >
+                    {category.techs.map((tech, techIndex) => (
+                      <motion.div
+                        key={techIndex}
+                        {...fadeInUp}
+                        className="flex items-start gap-4 group"
+                      >
+                        <div className="p-2 rounded-lg bg-gradient-to-r from-blue-500/20 to-purple-500/20 group-hover:from-blue-500/30 group-hover:to-purple-500/30 transition-all duration-300">
+                          {tech.icon}
+                        </div>
+                        <div>
+                          <h4 className="text-white font-semibold mb-1">{tech.name}</h4>
+                          <p className="text-gray-400 text-sm">{tech.description}</p>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                </Card>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* Flow Section */}
+          <div>
+            <motion.h3
+              {...fadeInUp}
+              className="text-3xl font-bold text-white mb-8 text-center"
+            >
+              制作フロー
+            </motion.h3>
+            <div className="grid gap-8">
+              {flowSteps.map((step, index) => (
+                <motion.div
+                  key={step.id}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                >
+                  <Card
+                    key={step.id}
+                    variant="tech"
+                    withHover
+                    padding="large"
+                  >
+                    <div className="flex flex-col md:flex-row items-start gap-6">
+                      <div className="flex-shrink-0">
+                        <div className="p-4 rounded-lg bg-gradient-to-r from-blue-500/20 to-purple-500/20">
+                          <step.icon className="w-8 h-8 text-blue-400/80" />
+                        </div>
+                      </div>
+                      <div className="flex-grow">
+                        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                          <h3 className="text-xl font-semibold text-white/90">
+                            {step.id}. {step.title}
+                          </h3>
+                          <span className="text-blue-400/80 font-semibold mt-2 md:mt-0">
+                            目安期間: {step.duration}
+                          </span>
+                        </div>
+                        <p className="text-gray-400/90 mb-4">{step.description}</p>
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div className="p-4 rounded-lg bg-gradient-to-r from-blue-500/10 to-blue-500/20">
+                            <h4 className="text-base font-semibold text-blue-400 mb-2">AIの役割</h4>
+                            <p className="text-sm text-gray-300/90 leading-relaxed">{step.aiRole}</p>
                           </div>
-                          <div>
-                            <h4 className="text-white/90 font-medium">{item.name}</h4>
-                            <p className="text-sm text-gray-400/90">{item.description}</p>
+                          <div className="p-4 rounded-lg bg-gradient-to-r from-purple-500/10 to-purple-500/20">
+                            <h4 className="text-base font-semibold text-purple-400 mb-2">人間の役割</h4>
+                            <p className="text-sm text-gray-300/90 leading-relaxed">{step.humanRole}</p>
                           </div>
                         </div>
-                      ))}
+                      </div>
                     </div>
                   </Card>
                 </motion.div>
@@ -181,56 +252,15 @@ const TechAndFlow = () => {
             </div>
           </div>
 
-          {/* Flow Section */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4 }}
-            className="text-center mb-16"
+            {...fadeInUp}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            className="text-center mt-12"
           >
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4">
-              開発フロー
-            </h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
-              AIと人間のそれぞれの強みを活かした効率的な開発プロセス
+            <p className="text-gray-400">
+              ※ プロジェクトの規模や要件に応じて期間は変動します
             </p>
           </motion.div>
-
-          <div className="grid gap-8">
-            {flowSteps.map((step, index) => (
-              <motion.div
-                key={step.id}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4 }}
-                className="backdrop-blur-sm bg-white/5 rounded-xl p-6 md:p-8 hover:bg-white/10 transition-all duration-300 border border-white/10"
-              >
-                <div className="flex flex-col md:flex-row items-start gap-6">
-                  <div className="flex-shrink-0">
-                    <div className="p-4 rounded-lg bg-gradient-to-r from-blue-500/20 to-purple-500/20">
-                      <step.icon className="w-8 h-8 text-blue-400/80" />
-                    </div>
-                  </div>
-                  <div className="flex-grow">
-                    <h3 className="text-xl font-semibold text-white/90 mb-2">{step.title}</h3>
-                    <p className="text-gray-400/90 mb-4">{step.description}</p>
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div>
-                        <h4 className="text-sm font-medium text-blue-400 mb-1">AI</h4>
-                        <p className="text-sm text-gray-400/90">{step.aiRole}</p>
-                      </div>
-                      <div>
-                        <h4 className="text-sm font-medium text-purple-400 mb-1">Human</h4>
-                        <p className="text-sm text-gray-400/90">{step.humanRole}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
         </div>
       </div>
     </Section>
