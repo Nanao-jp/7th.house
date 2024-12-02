@@ -4,6 +4,9 @@ import { useEffect, useRef } from 'react';
 
 const DesignAccents = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const frameCountRef = useRef(0);
+  const animationFrameRef = useRef<number>();
+  const isVisibleRef = useRef(true);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -11,6 +14,29 @@ const DesignAccents = () => {
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
+
+    let lastUpdateTime = 0;
+
+    // 基本的なノードの構造は維持
+    interface Node {
+      x: number;
+      y: number;
+      size: number;
+      baseAlpha: number;
+      breathPhase: number;
+      colorIndex: number;
+      velocity: {
+        x: number;
+        y: number;
+      };
+    }
+
+    // 事前定義された色を使用
+    const colors = [
+      { r: 59, g: 130, b: 246 },  // blue-500
+      { r: 139, g: 92, b: 246 },  // purple-500
+      { r: 99, g: 102, b: 241 }   // indigo-500
+    ];
 
     // キャンバスのサイズ設定
     const resizeCanvas = () => {
@@ -24,269 +50,170 @@ const DesignAccents = () => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // パードの型定義
-    interface Node {
-      x: number;
-      y: number;
-      z: number;
-      size: number;
-      baseAlpha: number;
-      breathPhase: number;
-      colorPhase: number; // 色の変化用
+    // パードの生成（動きを大きく）
+    const nodes: Node[] = Array.from({ length: 15 }, () => ({
+      x: Math.random() * canvas.width,
+      y: canvas.height * 0.5 + (Math.random() - 0.5) * (canvas.height * 0.4),
+      size: Math.random() * 4 + 6,  // サイズを少し大きく
+      baseAlpha: Math.random() * 0.3 + 0.4,  // 透明度を少し上げる
+      breathPhase: Math.random() * Math.PI * 2,
+      colorIndex: Math.floor(Math.random() * colors.length),
       velocity: {
-        x: number;
-        y: number;
-      };
-    }
-
-    // 接続の型定義
-    interface Connection {
-      startNode: Node;
-      endNode: Node;
-      lightProgress: number;
-      active: boolean;
-    }
-
-    // ノードとコネクションの配列
-    const nodes: Node[] = [];
-    const connections: Connection[] = [];
-
-    // カラーパレットの定義
-    const colors = {
-      blue: { r: 59, g: 130, b: 246 },   // blue-500
-      purple: { r: 139, g: 92, b: 246 },  // purple-500
-      indigo: { r: 99, g: 102, b: 241 }   // indigo-500
-    };
-
-    // 色の補間関数
-    const interpolateColor = (phase: number) => {
-      const normalizedPhase = phase % (Math.PI * 2);
-      let r, g, b;
-      
-      if (normalizedPhase < Math.PI * 2/3) {
-        // blue to purple
-        const t = normalizedPhase / (Math.PI * 2/3);
-        r = colors.blue.r + (colors.purple.r - colors.blue.r) * t;
-        g = colors.blue.g + (colors.purple.g - colors.blue.g) * t;
-        b = colors.blue.b + (colors.purple.b - colors.blue.b) * t;
-      } else if (normalizedPhase < Math.PI * 4/3) {
-        // purple to indigo
-        const t = (normalizedPhase - Math.PI * 2/3) / (Math.PI * 2/3);
-        r = colors.purple.r + (colors.indigo.r - colors.purple.r) * t;
-        g = colors.purple.g + (colors.indigo.g - colors.purple.g) * t;
-        b = colors.purple.b + (colors.indigo.b - colors.purple.b) * t;
-      } else {
-        // indigo to blue
-        const t = (normalizedPhase - Math.PI * 4/3) / (Math.PI * 2/3);
-        r = colors.indigo.r + (colors.blue.r - colors.indigo.r) * t;
-        g = colors.indigo.g + (colors.blue.g - colors.indigo.g) * t;
-        b = colors.indigo.b + (colors.blue.b - colors.indigo.b) * t;
+        x: (Math.random() - 0.5) * 0.5,  // X軸の動きを大きく
+        y: (Math.random() - 0.5) * 0.2    // Y軸の動きも大きく
       }
-      
-      return { r: Math.round(r), g: Math.round(g), b: Math.round(b) };
-    };
+    }));
 
-    // ノードの生成
-    const createNode = (): Node => {
-      const centerY = canvas.height * 0.5;
-      return {
-        x: Math.random() * canvas.width,
-        y: centerY + (Math.random() - 0.5) * (canvas.height * 0.4),
-        z: Math.random(),
-        size: Math.random() * 4 + 5,
-        baseAlpha: Math.random() * 0.25 + 0.35,
-        breathPhase: Math.random() * Math.PI * 2,
-        colorPhase: Math.random() * Math.PI * 2,
-        velocity: {
-          x: (Math.random() - 0.5) * 0.02,
-          y: (Math.random() - 0.5) * 0.005
-        }
-      };
-    };
-
-    // 初期ノードの生成
-    const nodeCount = 15; // ノード数を調整
-    for (let i = 0; i < nodeCount; i++) {
-      nodes.push(createNode());
-    }
-
-    // コネクションの更新
-    const updateConnections = () => {
-      connections.length = 0; // コネクションをリセット
-      
-      // 最も近いノード同士を接続
-      for (let i = 0; i < nodes.length; i++) {
-        const node = nodes[i];
-        const nearestNodes = nodes
-          .filter((_, index) => index !== i)
-          .sort((a, b) => {
-            const distA = Math.hypot(node.x - a.x, node.y - a.y);
-            const distB = Math.hypot(node.x - b.x, node.y - b.y);
-            return distA - distB;
-          })
-          .slice(0, 2); // 各ノードから最も近い2つのノードと接続
-
-        nearestNodes.forEach(nearNode => {
-          if (!connections.some(conn => 
-            (conn.startNode === node && conn.endNode === nearNode) ||
-            (conn.startNode === nearNode && conn.endNode === node)
-          )) {
-            connections.push({
-              startNode: node,
-              endNode: nearNode,
-              lightProgress: Math.random(), // ランダムな初期位置
-              active: Math.random() < 0.3 // 30%の確率でアクティブ
-            });
-          }
+    // Intersection Observerの設定（デバッグログを追加）
+    const observer = new IntersectionObserver(
+      (entries) => {
+        console.log('Intersection Observer Debug:', {
+          isIntersecting: entries[0].isIntersecting,
+          boundingClientRect: entries[0].boundingClientRect,
+          intersectionRatio: entries[0].intersectionRatio,
+          time: new Date().toISOString(),
+          elementSize: {
+            width: canvas.width,
+            height: canvas.height
+          },
+          parentElement: canvas.parentElement ? {
+            offsetWidth: canvas.parentElement.offsetWidth,
+            offsetHeight: canvas.parentElement.offsetHeight,
+            className: canvas.parentElement.className
+          } : null
         });
+
+        isVisibleRef.current = entries[0].isIntersecting;
+        if (isVisibleRef.current) {
+          console.log('🟢 Element is visible - Starting animation');
+          if (!animationFrameRef.current) {
+            animate(0);
+          }
+        } else {
+          console.log('🔴 Element is not visible - Stopping animation');
+          if (animationFrameRef.current) {
+            cancelAnimationFrame(animationFrameRef.current);
+            animationFrameRef.current = undefined;
+          }
+        }
+      },
+      { 
+        threshold: 0,
+        // rootMarginを100%に変更して判定範囲を広げる
+        rootMargin: '100% 0px'
       }
-    };
+    );
 
-    // ノードの更新
-    let lastTime = 0;
+    // 要素の初期状態をログ
+    console.log('Initial Canvas State:', {
+      canvas: {
+        width: canvas.width,
+        height: canvas.height,
+        className: canvas.className,
+        style: canvas.style,
+        getBoundingClientRect: canvas.getBoundingClientRect()
+      },
+      parent: canvas.parentElement ? {
+        className: canvas.parentElement.className,
+        style: canvas.parentElement.style,
+        getBoundingClientRect: canvas.parentElement.getBoundingClientRect()
+      } : null
+    });
+
+    observer.observe(canvas);
+
+    // 更新処理の最適化
     const updateNodes = (time: number) => {
-      const deltaTime = time - lastTime;
-      lastTime = time;
-      const timeScale = deltaTime / 1000;
-
       nodes.forEach(node => {
-        // 位置の更新（デルタタイムを考慮）
-        node.x += node.velocity.x * timeScale * 0.5;
-        node.y += node.velocity.y * timeScale * 0.5;
+        node.x += node.velocity.x;
+        node.y += node.velocity.y;
+        node.breathPhase += 0.03;  // 呼吸アニメーションを速く
 
-        // 呼吸アニメーション
-        node.breathPhase += 0.0003 * timeScale;
-        if (node.breathPhase > Math.PI * 2) node.breathPhase = 0;
-
-        // 画面端での跳ね返り
+        // 画面端での処理
         if (node.x < 0 || node.x > canvas.width) {
-          node.velocity.x *= -0.8;
-          node.velocity.y = (Math.random() - 0.5) * 0.005;
+          node.velocity.x *= -1;
         }
 
-        // Y座標の制限（広い範囲を維持）
+        // Y軸の制限
         const centerY = canvas.height * 0.5;
         const maxDistance = canvas.height * 0.35;
         if (Math.abs(node.y - centerY) > maxDistance) {
           node.y = centerY + (maxDistance * Math.sign(node.y - centerY));
-          node.velocity.y *= -0.4;
+          node.velocity.y *= -1;
         }
-
-        // ゆらゆら動作（大きな振幅、低速）
-        const normalizedTime = time / 30000; // 30秒で1サイクルに延長
-        
-        // timeScaleを使用せず、直接小さな値を加算
-        node.x += Math.sin(normalizedTime + node.breathPhase) * 0.1;
-        node.y += Math.cos(normalizedTime + node.breathPhase) * 0.05;
-
-        // 色相の更新（非常にゆっくり）
-        node.colorPhase += 0.0001 * timeScale;
-        if (node.colorPhase > Math.PI * 2) node.colorPhase = 0;
       });
     };
 
-    // 描画関数の調整
-    const draw = (time: number) => {
+    // 描画の最適化（接続線の距離を調整）
+    const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // コネクションの描画
-      connections.forEach(conn => {
-        const startColor = interpolateColor(conn.startNode.colorPhase);
-        const endColor = interpolateColor(conn.endNode.colorPhase);
-
-        // 基本の線
-        ctx.beginPath();
-        ctx.moveTo(conn.startNode.x, conn.startNode.y);
-        ctx.lineTo(conn.endNode.x, conn.endNode.y);
-        const avgAlpha = (conn.startNode.baseAlpha + conn.endNode.baseAlpha) / 2;
-        ctx.strokeStyle = `rgba(${startColor.r}, ${startColor.g}, ${startColor.b}, ${avgAlpha * 0.25})`;
-        ctx.lineWidth = 1;
-        ctx.stroke();
-
-        // 光の表現
-        if (conn.active) {
-          const gradient = ctx.createLinearGradient(
-            conn.startNode.x, conn.startNode.y,
-            conn.endNode.x, conn.endNode.y
-          );
-
-          const lightPos = conn.lightProgress;
-          gradient.addColorStop(Math.max(0, lightPos - 0.2), 
-            `rgba(${startColor.r}, ${startColor.g}, ${startColor.b}, 0)`);
-          gradient.addColorStop(lightPos, 
-            `rgba(${endColor.r}, ${endColor.g}, ${endColor.b}, ${avgAlpha * 0.6})`);
-          gradient.addColorStop(Math.min(1, lightPos + 0.2), 
-            `rgba(${endColor.r}, ${endColor.g}, ${endColor.b}, 0)`);
-
-          ctx.beginPath();
-          ctx.moveTo(conn.startNode.x, conn.startNode.y);
-          ctx.lineTo(conn.endNode.x, conn.endNode.y);
-          ctx.strokeStyle = gradient;
-          ctx.lineWidth = 1;
-          ctx.stroke();
-
-          conn.lightProgress += 0.002;
-          if (conn.lightProgress >= 1) {
-            conn.lightProgress = 0;
-            conn.active = Math.random() < 0.2;
+      // ノード間の接続を描画
+      nodes.forEach((node, i) => {
+        nodes.slice(i + 1).forEach(otherNode => {
+          const distance = Math.hypot(node.x - otherNode.x, node.y - otherNode.y);
+          if (distance < 150) {  // 接続距離を増やす
+            const alpha = (1 - distance / 150) * 0.3;  // 透明度も調整
+            ctx.beginPath();
+            ctx.moveTo(node.x, node.y);
+            ctx.lineTo(otherNode.x, otherNode.y);
+            const color = colors[node.colorIndex];
+            ctx.strokeStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${alpha})`;
+            ctx.stroke();
           }
-        }
+        });
       });
 
       // ノードの描画
       nodes.forEach(node => {
-        const breathEffect = 1 + Math.sin(node.breathPhase) * 0.15;
-        const currentSize = node.size * breathEffect;
-        const alpha = node.baseAlpha * (0.8 + Math.sin(node.breathPhase) * 0.2);
-        const color = interpolateColor(node.colorPhase);
+        const color = colors[node.colorIndex];
+        const size = node.size * (1 + Math.sin(node.breathPhase) * 0.2);  // 呼吸の振幅を大きく
+        const alpha = node.baseAlpha;
 
-        // ノードの影
         ctx.beginPath();
-        ctx.arc(node.x, node.y, currentSize + 2, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${alpha * 0.2})`;
-        ctx.filter = 'blur(3px)';
-        ctx.fill();
-        ctx.filter = 'none';
-
-        // ノードの本体
-        ctx.beginPath();
-        ctx.arc(node.x, node.y, currentSize, 0, Math.PI * 2);
+        ctx.arc(node.x, node.y, size, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${alpha})`;
         ctx.fill();
       });
     };
 
-    // アニメーションループ
-    let lastConnectionUpdate = 0;
-    let frameCount = 0;
+    // アニメーションループの最適化
     const animate = (time: number) => {
-      frameCount++;
-      // フレームスキップで更新頻度を下げる
-      if (frameCount % 2 === 0) { // 30FPSに制限
+      if (!isVisibleRef.current) return;
+
+      const deltaTime = time - lastUpdateTime;
+      
+      // 約15FPSの制限（66.67ms）
+      if (deltaTime >= 66) {
+        lastUpdateTime = time;
         updateNodes(time);
-        
-        // コネクションの更新は1秒ごと
-        if (time - lastConnectionUpdate > 1000) {
-          updateConnections();
-          lastConnectionUpdate = time;
-        }
-        
-        draw(time);
+        draw();
       }
-      requestAnimationFrame(animate);
+      
+      animationFrameRef.current = requestAnimationFrame(animate);
     };
 
-    animate(0);
+    // 初期アニメーション開始
+    if (isVisibleRef.current) {
+      lastUpdateTime = performance.now();
+      animate(lastUpdateTime);
+    }
 
+    // クリーンアップ
     return () => {
+      observer.disconnect();
       window.removeEventListener('resize', resizeCanvas);
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
     };
   }, []);
 
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 w-full h-full"
+      className="w-full h-full"
+      style={{ background: 'transparent' }}
     />
   );
 };
