@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion'
 import { FaCheck } from 'react-icons/fa'
 import Card from '@/components/ui/Card'
-import { fadeInUp } from '@/constants/animations'
 import { PricingPlan } from '@/constants/pricing'
 import Button from '@/components/ui/Button'
 
@@ -17,8 +16,10 @@ const PricingCard = ({ plan, index }: PricingCardProps) => {
 
   return (
     <motion.div
-      {...fadeInUp}
-      transition={{ duration: 0.6, delay: index * 0.2 }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.4, delay: index * 0.1 }}
       className="h-full"
     >
       <Card

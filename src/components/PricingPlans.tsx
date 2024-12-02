@@ -1,7 +1,6 @@
 "use client"
 
 import { motion } from 'framer-motion'
-import { fadeInUp, staggerChildren } from '@/constants/animations'
 import { pricingPlans } from '@/constants/pricing'
 import Section from '@/components/ui/Section'
 import PricingCard from './pricing/PricingCard'
@@ -18,7 +17,13 @@ const PricingPlans = () => {
     >
       <div className="relative">
         <div className="relative z-10 max-w-6xl mx-auto px-4">
-          <motion.div {...fadeInUp} className="text-center mb-16">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4 }}
+            className="text-center mb-16"
+          >
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4">
               料金プラン
             </h2>
@@ -27,14 +32,11 @@ const PricingPlans = () => {
             </p>
           </motion.div>
 
-          <motion.div
-            {...staggerChildren()}
-            className="grid md:grid-cols-3 gap-8"
-          >
+          <div className="grid md:grid-cols-3 gap-8">
             {pricingPlans.map((plan, index) => (
               <PricingCard key={index} plan={plan} index={index} />
             ))}
-          </motion.div>
+          </div>
 
           <OperatingCosts />
           <PricingFAQ />

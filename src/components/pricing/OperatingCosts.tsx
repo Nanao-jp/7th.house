@@ -2,12 +2,14 @@
 
 import { motion } from 'framer-motion'
 import Card from '@/components/ui/Card'
-import { fadeInUp } from '@/constants/animations'
 
 const OperatingCosts = () => {
   return (
     <motion.div 
-      {...fadeInUp} 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.4 }}
       className="mt-12 text-center"
     >
       <Card

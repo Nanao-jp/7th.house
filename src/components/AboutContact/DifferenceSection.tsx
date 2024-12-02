@@ -3,7 +3,6 @@ import { FaBrain } from 'react-icons/fa';
 import { HiLightningBolt } from 'react-icons/hi';
 import { FaRocket } from 'react-icons/fa';
 import Card from '@/components/ui/Card';
-import { fadeInUp, staggerChildren } from '@/constants/animations';
 
 const strengths = [
   {
@@ -40,49 +39,38 @@ const strengths = [
 
 const DifferenceSection = () => {
   return (
-    <motion.div
-      {...staggerChildren()}
-      className="grid gap-12"
-    >
+    <div className="grid gap-12">
       {strengths.map((item, index) => (
-        <Card
+        <motion.div
           key={index}
-          variant="tech"
-          withHover
-          padding="large"
-          {...fadeInUp}
-          transition={{ duration: 0.6, delay: index * 0.2 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: index * 0.1 }}
         >
-          <div className="flex flex-col md:flex-row items-center md:items-start gap-6 p-4">
-            <div className="flex-shrink-0">
-              <div className="p-6 rounded-2xl bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20 backdrop-blur-sm">
+          <Card
+            variant="tech"
+            withHover
+            padding="large"
+          >
+            <div className="flex flex-col items-center text-center">
+              <div className="p-4 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 mb-6">
                 {item.icon}
               </div>
-            </div>
-            <div className="flex-grow text-center md:text-left">
-              <h3 className="text-2xl font-bold text-white mb-4">{item.title}</h3>
-              <p className="text-gray-300 mb-6 leading-relaxed">
-                {item.description}
-              </p>
-              <ul className="space-y-3">
+              <h4 className="text-xl font-semibold text-white mb-4">{item.title}</h4>
+              <p className="text-gray-400">{item.description}</p>
+              <ul className="mt-6 space-y-2">
                 {item.points.map((point, pointIndex) => (
-                  <motion.li
-                    key={pointIndex}
-                    className="flex items-center gap-3 text-gray-300"
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.3 + pointIndex * 0.1 }}
-                  >
-                    <span className="w-2 h-2 rounded-full bg-blue-400" />
+                  <li key={pointIndex} className="text-gray-300 text-sm">
                     {point}
-                  </motion.li>
+                  </li>
                 ))}
               </ul>
             </div>
-          </div>
-        </Card>
+          </Card>
+        </motion.div>
       ))}
-    </motion.div>
+    </div>
   );
 };
 
