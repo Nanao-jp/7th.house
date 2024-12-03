@@ -32,6 +32,9 @@ export const metadata: Metadata = {
     initialScale: 1,
     maximumScale: 1,
   },
+  verification: {
+    google: 'dqo4v5skZVyr_ZognX5xywMnrlv8zq84zKbKVK_Z6UA',
+  },
   authors: [{ name: 'Nanao' }],
   generator: 'Next.js',
   applicationName: '7th.House',
