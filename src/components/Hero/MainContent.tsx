@@ -22,7 +22,7 @@ const MainContent = () => {
           ]}
           wrapper="h1"
           speed={50}
-          className="relative inline-block"
+          className="relative inline-block whitespace-nowrap"
           cursor={true}
           repeat={0}
         />

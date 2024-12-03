@@ -26,7 +26,7 @@ const technologies = [
       {
         name: "TailwindCSS",
         icon: <SiTailwindcss className="w-8 h-8" />,
-        description: "美しいデザインの現"
+        description: "美しいデザインの実現"
       }
     ]
   },
@@ -37,17 +37,17 @@ const technologies = [
       {
         name: "TypeScript",
         icon: <SiTypescript className="w-8 h-8" />,
-        description: "型安全な開発環境"
+        description: "安定した開発環境"
       },
       {
         name: "Prisma",
         icon: <SiPrisma className="w-8 h-8" />,
-        description: "効率的なDB操作"
+        description: "データベース管理"
       },
       {
         name: "Database",
         icon: <FaDatabase className="w-8 h-8" />,
-        description: "データの永続化と管理"
+        description: "データの安全な保存"
       }
     ]
   },
@@ -58,17 +58,17 @@ const technologies = [
       {
         name: "OpenAI",
         icon: <SiOpenai className="w-8 h-8" />,
-        description: "高度な自然言語処理"
+        description: "AIを活用した機能開発"
       },
       {
         name: "AI開発",
         icon: <FaRobot className="w-8 h-8" />,
-        description: "独自のAI機能開発"
+        description: "便利な機能の実装"
       },
       {
         name: "AI連携",
         icon: <FaCode className="w-8 h-8" />,
-        description: "APIを活用した機能実装"
+        description: "外部サービスとの連携"
       }
     ]
   }
@@ -138,11 +138,10 @@ const TechAndFlow = () => {
             className="text-center mb-16"
           >
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight">
-              先進技術による<br className="sm:hidden" />実現
+              最新技術で実現する<br className="sm:hidden" />高品質なWeb開発
             </h2>
             <p className="text-base md:text-lg text-gray-400 max-w-2xl mx-auto">
-              最新のWeb技術とAI技術を組み合わせることで、
-              高品質で革新的なソリューションを提供します
+              確かな技術力で、使いやすく高性能なWebサイトを実現します
             </p>
           </motion.div>
 

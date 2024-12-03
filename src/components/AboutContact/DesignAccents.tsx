@@ -183,8 +183,8 @@ const DesignAccents = () => {
 
       const deltaTime = time - lastUpdateTime;
       
-      // 約15FPSの制限（66.67ms）
-      if (deltaTime >= 66) {
+      // 約30FPSの制限（33.33ms）
+      if (deltaTime >= 33) {
         lastUpdateTime = time;
         updateNodes(time);
         draw();

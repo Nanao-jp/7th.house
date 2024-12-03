@@ -21,7 +21,7 @@ export const Title = () => {
             duration: 2,
             repeat: Infinity,
             ease: "easeInOut",
-            frameRate: 15
+            frameRate: 30
           }}
         />
       </span>

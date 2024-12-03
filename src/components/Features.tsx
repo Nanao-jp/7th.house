@@ -9,20 +9,20 @@ const Features = () => {
     {
       icon: <FaRocket className="w-8 h-8 text-blue-500" />,
       title: "高速開発",
-      description: "AIによる自動化とコード生成により、開発時間を最大70%削減",
-      details: "反復的なタスクの自動化、コードの自動生成、テスト自動化により開発スピードを大幅に向上"
+      description: "AIと最新技術で開発時間を大幅短縮",
+      details: "効率的な開発プロセスで、スピーディーな実装を実現"
     },
     {
       icon: <FaChartLine className="w-8 h-8 text-purple-500" />,
-      title: "データ駆動の意思決定",
-      description: "AIが分析した市場データと最新トレンドに基づく意思決定",
-      details: "ユーザー行動分析、市場動向予測、競合分析を活用した戦略的な開発アプローチ"
+      title: "データ分析",
+      description: "データ分析で的確な判断をサポート",
+      details: "ユーザー行動と市場動向を分析し、最適な提案を実現"
     },
     {
       icon: <FaCogs className="w-8 h-8 text-indigo-500" />,
-      title: "カスタマイズ可能なソリューション",
-      description: "ビジネスニーズに合わせた柔軟なAIソリューション",
-      details: "スケーラブルなアーキテクチャ、モジュール化された設計、柔軟なAPIインテグレーション"
+      title: "拡張性",
+      description: "ビジネスの成長に合わせて進化するシステム",
+      details: "将来の機能追加や規模拡大にも柔軟に対応"
     }
   ];
 

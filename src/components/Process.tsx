@@ -8,34 +8,34 @@ const Process = () => {
     {
       step: "01",
       title: "要件ヒアリング",
-      description: "人による丁寧なヒアリングにAIの分析力を組み合わせる",
-      traditional: "経験豊富な担当者による\nニーズの深い理解",
-      enhancement: "AIによる要件の\n体系的な分析と提案",
-      benefit: "より正確で包括的な要件定義を実現"
+      description: "AIを活用した要件分析とヒアリング",
+      traditional: "経験豊富な担当者による\nニーズの把握",
+      enhancement: "AIによる要件の\n分析と提案",
+      benefit: "より正確で効率的な要件定義"
     },
     {
       step: "02",
       title: "設計・プランニング",
-      description: "人間の創造性とAIの分析力による最適な設計",
-      traditional: "プロジェクト経験に基づく\n設計判断",
-      enhancement: "データ分析による\n設計の最適化",
-      benefit: "経験と分析の融合による確実な設計"
+      description: "実績とデータに基づく設計提案",
+      traditional: "プロジェクト経験を活かした\n設計提案",
+      enhancement: "データに基づく\n最適な設計",
+      benefit: "確実性の高い設計プラン"
     },
     {
       step: "03",
       title: "開発・実装",
-      description: "従来の開発手法をAIがサポートし効率を向上",
-      traditional: "熟練した開発者による\n確実な実装",
-      enhancement: "AIによる開発補助と\n品質チェック",
-      benefit: "高品質な実装と開発速度の向上"
+      description: "効率的な開発と品質管理",
+      traditional: "熟練した開発者による\n実装",
+      enhancement: "最新ツールによる\n品質管理",
+      benefit: "高品質な実装を効率的に"
     },
     {
       step: "04",
-      title: "テスト・デプロイ",
-      description: "人間の判断とAIの自動化による確実な展開",
-      traditional: "細やかな動作確認と\n慎重なデプロイ",
-      enhancement: "自動テストと\nデプロイの効率化",
-      benefit: "確実性と効率性の両立"
+      title: "テスト・公開",
+      description: "入念なテストと安全な公開",
+      traditional: "細やかな動作確認と\n慎重な公開",
+      enhancement: "自動テストと\n安全な展開",
+      benefit: "安心できる確実な公開"
     }
   ];
 

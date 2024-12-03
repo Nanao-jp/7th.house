@@ -17,7 +17,7 @@ const CyberpunkEffect = () => {
           duration: 2,
           repeat: Infinity,
           ease: "linear",
-          frameRate: 15
+          frameRate: 30
         }}
       />
       {/* 右のボーダー */}
@@ -33,7 +33,7 @@ const CyberpunkEffect = () => {
           repeat: Infinity,
           ease: "linear",
           delay: 0.5,
-          frameRate: 15
+          frameRate: 30
         }}
       />
       {/* 下のボーダー */}
@@ -49,7 +49,7 @@ const CyberpunkEffect = () => {
           repeat: Infinity,
           ease: "linear",
           delay: 1,
-          frameRate: 15
+          frameRate: 30
         }}
       />
       {/* 左のボーダー */}
@@ -65,7 +65,7 @@ const CyberpunkEffect = () => {
           repeat: Infinity,
           ease: "linear",
           delay: 1.5,
-          frameRate: 15
+          frameRate: 30
         }}
       />
       

@@ -26,10 +26,10 @@ const AboutContact = () => {
             className="text-center mb-16 pt-12 md:pt-16"
           >
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight">
-              個人開発者だからこそ<br className="sm:hidden" />実現できる価値
+              技術力と創造性で<br className="sm:hidden" />ビジネスをサポート
             </h2>
             <p className="text-base md:text-lg text-gray-300 max-w-2xl mx-auto">
-              AIと人間の強みを組み合わせた、柔軟で効率的な開発サービス
+              お客様のニーズに合わせた柔軟な開発サービス
             </p>
           </motion.div>
 
