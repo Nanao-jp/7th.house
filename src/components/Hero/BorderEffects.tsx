@@ -53,63 +53,31 @@ export const ShiningEffect = () => {
       <motion.div
         className="absolute top-0 left-[20%] h-[2px] bg-gradient-to-r from-blue-500/50 via-purple-500/50 to-pink-500/50 -rotate-2"
         animate={{
-          width: ['0%', '30%', '0%'],
-          left: ['20%', '50%', '80%'],
-          opacity: [0, 1, 0]
+          width: ['0%', '40%', '0%'],
+          left: ['20%', '40%', '80%'],
+          opacity: [0, 0.5, 0]
         }}
         transition={{
-          duration: 2,
+          duration: 3,
           repeat: Infinity,
-          ease: "linear",
-          frameRate: 30
-        }}
-      />
-      {/* 右のボーダー */}
-      <motion.div
-        className="absolute right-0 top-[20%] w-[2px] bg-gradient-to-b from-blue-500/50 via-purple-500/50 to-pink-500/50 -rotate-2"
-        animate={{
-          height: ['0%', '30%', '0%'],
-          top: ['20%', '50%', '80%'],
-          opacity: [0, 1, 0]
-        }}
-        transition={{
-          duration: 2,
-          repeat: Infinity,
-          ease: "linear",
-          delay: 0.5,
-          frameRate: 30
+          ease: "easeInOut",
+          repeatDelay: 2
         }}
       />
       {/* 下のボーダー */}
       <motion.div
         className="absolute bottom-0 right-[20%] h-[2px] bg-gradient-to-r from-pink-500/50 via-purple-500/50 to-blue-500/50 rotate-2"
         animate={{
-          width: ['0%', '30%', '0%'],
-          right: ['20%', '50%', '80%'],
-          opacity: [0, 1, 0]
+          width: ['0%', '40%', '0%'],
+          right: ['20%', '40%', '80%'],
+          opacity: [0, 0.5, 0]
         }}
         transition={{
-          duration: 2,
+          duration: 3,
           repeat: Infinity,
-          ease: "linear",
-          delay: 1,
-          frameRate: 30
-        }}
-      />
-      {/* 左のボーダー */}
-      <motion.div
-        className="absolute left-0 bottom-[20%] w-[2px] bg-gradient-to-b from-pink-500/50 via-purple-500/50 to-blue-500/50 rotate-2"
-        animate={{
-          height: ['0%', '30%', '0%'],
-          bottom: ['20%', '50%', '80%'],
-          opacity: [0, 1, 0]
-        }}
-        transition={{
-          duration: 2,
-          repeat: Infinity,
-          ease: "linear",
+          ease: "easeInOut",
           delay: 1.5,
-          frameRate: 30
+          repeatDelay: 2
         }}
       />
       

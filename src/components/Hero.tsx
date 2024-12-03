@@ -19,9 +19,13 @@ const Hero = () => {
           className="text-center relative flex items-center justify-center"
         >
           <GlowEffect />
-          <MainBorders />
+          <div className="relative h-80 w-full flex items-center justify-center">
+            <MainBorders />
+            <div className="relative z-10">
+              <MainContent />
+            </div>
+          </div>
           <ShiningEffect />
-          <MainContent />
         </motion.div>
       </div>
     </section>
