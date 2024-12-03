@@ -1,0 +1,29 @@
+# 7th.House robots.txt
+
+# すべてのクローラーに対するルール
+User-agent: *
+
+# 基本的にすべてのアクセスを許可
+Allow: /
+
+# APIルートへのアクセスを制限
+Disallow: /api/
+
+# Next.jsの内部ファイルへのアクセスを制限
+Disallow: /_next/
+Disallow: /_error/
+
+# 画像やアセットは許可
+Allow: /*.js$
+Allow: /*.css$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.gif$
+Allow: /*.svg$
+Allow: /*.ico$
+
+# クロール頻度の設定
+Crawl-delay: 10
+
+# サイトマップの場所（後で作成予定）
+Sitemap: https://7th-house.net/sitemap.xml 
