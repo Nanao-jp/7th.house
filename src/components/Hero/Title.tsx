@@ -20,7 +20,8 @@ export const Title = () => {
           transition={{
             duration: 2,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: "easeInOut",
+            frameRate: 15
           }}
         />
       </span>

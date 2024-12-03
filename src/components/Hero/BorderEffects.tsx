@@ -19,7 +19,8 @@ export const MainBorders = () => {
         transition={{
           duration: 6,
           repeat: Infinity,
-          ease: "linear"
+          ease: "linear",
+          frameRate: 15
         }}
       />
       <motion.div 
@@ -37,7 +38,8 @@ export const MainBorders = () => {
           duration: 6,
           repeat: Infinity,
           ease: "linear",
-          delay: 3
+          delay: 3,
+          frameRate: 15
         }}
       />
     </>
@@ -58,7 +60,8 @@ export const ShiningEffect = () => {
         transition={{
           duration: 2,
           repeat: Infinity,
-          ease: "linear"
+          ease: "linear",
+          frameRate: 15
         }}
       />
       {/* 右のボーダー */}
@@ -73,7 +76,8 @@ export const ShiningEffect = () => {
           duration: 2,
           repeat: Infinity,
           ease: "linear",
-          delay: 0.5
+          delay: 0.5,
+          frameRate: 15
         }}
       />
       {/* 下のボーダー */}
@@ -88,7 +92,8 @@ export const ShiningEffect = () => {
           duration: 2,
           repeat: Infinity,
           ease: "linear",
-          delay: 1
+          delay: 1,
+          frameRate: 15
         }}
       />
       {/* 左のボーダー */}
@@ -103,7 +108,8 @@ export const ShiningEffect = () => {
           duration: 2,
           repeat: Infinity,
           ease: "linear",
-          delay: 1.5
+          delay: 1.5,
+          frameRate: 15
         }}
       />
       

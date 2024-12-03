@@ -96,7 +96,7 @@ const TechStack = () => {
           </motion.div>
 
           <motion.div 
-            {...staggerChildren()}
+            {...staggerChildren(0.1)}
             className="grid md:grid-cols-3 gap-8"
           >
             {technologies.map((category, index) => (
@@ -106,19 +106,15 @@ const TechStack = () => {
                 withHover
                 padding="large"
                 {...fadeInUp}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
               >
                 <h3 className="text-2xl font-semibold text-white mb-4">{category.category}</h3>
                 <p className="text-gray-400 mb-8">{category.description}</p>
                 
-                <motion.div 
-                  {...staggerChildren(0.1)}
-                  className="space-y-6"
-                >
+                <div className="space-y-6">
                   {category.techs.map((tech, techIndex) => (
-                    <motion.div
+                    <div
                       key={techIndex}
-                      {...fadeInUp}
                       className="flex items-start gap-4 group"
                     >
                       <div className="p-2 rounded-lg bg-gradient-to-r from-blue-500/20 to-purple-500/20 group-hover:from-blue-500/30 group-hover:to-purple-500/30 transition-all duration-300">
@@ -128,9 +124,9 @@ const TechStack = () => {
                         <h4 className="text-white font-semibold mb-1">{tech.name}</h4>
                         <p className="text-gray-400 text-sm">{tech.description}</p>
                       </div>
-                    </motion.div>
+                    </div>
                   ))}
-                </motion.div>
+                </div>
               </Card>
             ))}
           </motion.div>

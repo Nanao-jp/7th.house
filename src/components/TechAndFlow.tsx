@@ -26,7 +26,7 @@ const technologies = [
       {
         name: "TailwindCSS",
         icon: <SiTailwindcss className="w-8 h-8" />,
-        description: "美しいデザインの���現"
+        description: "美しいデザインの現"
       }
     ]
   },
@@ -209,8 +209,16 @@ const TechAndFlow = () => {
                   key={step.id}
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  viewport={{ 
+                    once: true,
+                    margin: "-10%",
+                    amount: 0.3
+                  }}
+                  transition={{ 
+                    duration: 0.3,
+                    delay: index * 0.05,
+                    ease: "easeOut"
+                  }}
                 >
                   <Card
                     key={step.id}
@@ -224,24 +232,24 @@ const TechAndFlow = () => {
                           <step.icon className="w-8 h-8 text-blue-400/80" />
                         </div>
                       </div>
-                      <div className="flex-grow">
-                        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                          <h3 className="text-xl font-semibold text-white/90">
+                      <div className="flex-grow space-y-4">
+                        <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+                          <h3 className="text-xl font-semibold text-white">
                             {step.id}. {step.title}
                           </h3>
-                          <span className="text-blue-400/80 font-semibold mt-2 md:mt-0">
+                          <span className="text-blue-400 font-semibold mt-1 md:mt-0">
                             目安期間: {step.duration}
                           </span>
                         </div>
-                        <p className="text-gray-400/90 mb-4">{step.description}</p>
+                        <p className="text-gray-400">{step.description}</p>
                         <div className="grid md:grid-cols-2 gap-4">
-                          <div className="p-4 rounded-lg bg-gradient-to-r from-blue-500/10 to-blue-500/20">
-                            <h4 className="text-base font-semibold text-blue-400 mb-2">AIの役割</h4>
-                            <p className="text-sm text-gray-300/90 leading-relaxed">{step.aiRole}</p>
+                          <div className="rounded-lg bg-blue-500/10 p-4">
+                            <h4 className="text-blue-400 font-semibold mb-2">AIの役割</h4>
+                            <p className="text-gray-300 text-sm leading-relaxed">{step.aiRole}</p>
                           </div>
-                          <div className="p-4 rounded-lg bg-gradient-to-r from-purple-500/10 to-purple-500/20">
-                            <h4 className="text-base font-semibold text-purple-400 mb-2">人間の役割</h4>
-                            <p className="text-sm text-gray-300/90 leading-relaxed">{step.humanRole}</p>
+                          <div className="rounded-lg bg-purple-500/10 p-4">
+                            <h4 className="text-purple-400 font-semibold mb-2">人間の役割</h4>
+                            <p className="text-gray-300 text-sm leading-relaxed">{step.humanRole}</p>
                           </div>
                         </div>
                       </div>

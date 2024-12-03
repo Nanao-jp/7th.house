@@ -1,3 +1,5 @@
+"use client"
+
 import { motion } from 'framer-motion'
 
 const CyberpunkEffect = () => {
@@ -14,7 +16,8 @@ const CyberpunkEffect = () => {
         transition={{
           duration: 2,
           repeat: Infinity,
-          ease: "linear"
+          ease: "linear",
+          frameRate: 15
         }}
       />
       {/* 右のボーダー */}
@@ -29,7 +32,8 @@ const CyberpunkEffect = () => {
           duration: 2,
           repeat: Infinity,
           ease: "linear",
-          delay: 0.5
+          delay: 0.5,
+          frameRate: 15
         }}
       />
       {/* 下のボーダー */}
@@ -44,7 +48,8 @@ const CyberpunkEffect = () => {
           duration: 2,
           repeat: Infinity,
           ease: "linear",
-          delay: 1
+          delay: 1,
+          frameRate: 15
         }}
       />
       {/* 左のボーダー */}
@@ -59,7 +64,8 @@ const CyberpunkEffect = () => {
           duration: 2,
           repeat: Infinity,
           ease: "linear",
-          delay: 1.5
+          delay: 1.5,
+          frameRate: 15
         }}
       />
       

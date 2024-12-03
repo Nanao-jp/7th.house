@@ -13,7 +13,8 @@ export const GlowEffect = () => {
       transition={{
         duration: 4,
         repeat: Infinity,
-        ease: "easeInOut"
+        ease: "easeInOut",
+        frameRate: 15
       }}
     />
   )

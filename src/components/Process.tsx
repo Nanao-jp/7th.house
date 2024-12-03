@@ -69,41 +69,43 @@ const Process = () => {
               key={index}
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="backdrop-blur-sm bg-white/5 rounded-xl p-6 md:p-8 hover:bg-white/10 transition-all duration-300 border border-white/10"
+              viewport={{ 
+                once: true,
+                margin: "-10%",
+                amount: 0.3
+              }}
+              transition={{ 
+                duration: 0.3,
+                delay: index * 0.05,
+                ease: "easeOut"
+              }}
+              className="backdrop-blur-sm bg-white/5 rounded-xl p-6 md:p-8 hover:bg-white/10 transition-colors duration-300 border border-white/10"
             >
-              <div className="grid md:grid-cols-5 gap-4 md:gap-6 items-center">
-                <div className="md:col-span-2">
-                  <div className="flex items-center gap-3 md:gap-4 mb-3 md:mb-4">
+              <div className="flex flex-col md:flex-row gap-6">
+                <div className="flex-shrink-0 md:w-2/5 space-y-4">
+                  <div className="flex items-center gap-3 md:gap-4">
                     <span className="text-3xl md:text-4xl font-bold text-blue-500">{process.step}</span>
                     <h3 className="text-xl md:text-2xl font-semibold text-white">{process.title}</h3>
                   </div>
                   <p className="text-sm md:text-base text-gray-300">{process.description}</p>
                 </div>
                 
-                <div className="md:col-span-3">
-                  <div className="grid md:grid-cols-7 gap-2 items-center">
-                    <div className="md:col-span-3 p-3 md:p-4 rounded-lg bg-gradient-to-r from-indigo-600/30 to-blue-500/30">
-                      <h4 className="text-xs md:text-sm font-semibold text-blue-200 mb-2">従来のやり方</h4>
-                      <p className="text-sm md:text-base text-white whitespace-pre-line">{process.traditional}</p>
-                    </div>
-                    
-                    <div className="hidden md:flex md:col-span-1 justify-center">
-                      <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
-                        <HiArrowsExpand className="w-5 h-5 md:w-6 md:h-6 text-blue-400" />
-                      </div>
+                <div className="flex-grow space-y-4">
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="p-4 rounded-lg bg-blue-500/20">
+                      <h4 className="text-sm md:text-base font-semibold text-blue-400 mb-2">従来のやり方</h4>
+                      <p className="text-sm md:text-base text-gray-300 leading-relaxed whitespace-pre-line">{process.traditional}</p>
                     </div>
 
-                    <div className="md:col-span-3 p-3 md:p-4 rounded-lg bg-gradient-to-r from-blue-900/50 to-purple-900/50">
-                      <h4 className="text-xs md:text-sm font-semibold text-purple-200 mb-2">AI による強化</h4>
-                      <p className="text-sm md:text-base text-white whitespace-pre-line">{process.enhancement}</p>
+                    <div className="p-4 rounded-lg bg-purple-500/20">
+                      <h4 className="text-sm md:text-base font-semibold text-purple-400 mb-2">AI による強化</h4>
+                      <p className="text-sm md:text-base text-gray-300 leading-relaxed whitespace-pre-line">{process.enhancement}</p>
                     </div>
                   </div>
                   
-                  <div className="mt-3 md:mt-4 p-2 md:p-3 rounded-lg bg-gradient-to-r from-indigo-600/20 via-blue-600/20 to-purple-600/20 border border-white/5">
-                    <p className="text-center text-xs md:text-sm text-white">
-                      <span className="text-blue-300 font-semibold">実現できること：</span> {process.benefit}
+                  <div className="p-3 rounded-lg bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-white/5">
+                    <p className="text-center text-sm md:text-base text-gray-300">
+                      <span className="font-bold bg-gradient-to-r from-blue-400 via-blue-300 to-purple-300 text-transparent bg-clip-text">実現できること：</span> {process.benefit}
                     </p>
                   </div>
                 </div>
@@ -111,19 +113,6 @@ const Process = () => {
             </motion.div>
           ))}
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
-          className="text-center mt-12"
-        >
-          <button className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-colors duration-300">
-            開発プロセスの詳細を見る
-            <BsArrowRight className="w-5 h-5" />
-          </button>
-        </motion.div>
       </div>
     </Section>
   );

@@ -3,11 +3,20 @@
 import Button from '@/components/ui/Button'
 
 const ActionButton = () => {
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    const element = document.getElementById('demo')
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
   return (
     <Button
-      href="#demonstration"
+      href="#demo"
       variant="gradient"
       className="px-8 py-4 sm:px-10 sm:py-5 text-base sm:text-lg font-medium"
+      onClick={handleClick}
     >
       <span>AIの実力を体験する</span>
       <svg

@@ -24,7 +24,8 @@ const Background = () => {
           transition={{
             duration: 8,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: "easeInOut",
+            frameRate: 15
           }}
         />
         <motion.div
@@ -37,7 +38,8 @@ const Background = () => {
             duration: 8,
             repeat: Infinity,
             ease: "easeInOut",
-            delay: 1
+            delay: 1,
+            frameRate: 15
           }}
         />
       </div>
