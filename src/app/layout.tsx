@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Space_Grotesk, Orbitron, M_PLUS_1 } from "next/font/google";
 import "./globals.css";
 import Layout from '@/components/Layout'
+import JsonLd from '@/components/JsonLd'
 
 const spaceGrotesk = Space_Grotesk({ 
   subsets: ["latin"],
@@ -104,6 +105,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className={`${spaceGrotesk.variable} ${orbitron.variable} ${mplus.variable}`}>
+        <JsonLd />
         <Layout>
           {children}
         </Layout>
