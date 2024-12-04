@@ -3,6 +3,14 @@
 import { motion } from 'framer-motion'
 
 const CyberpunkEffect = () => {
+  // アニメーション設定の共通化
+  const baseTransition = {
+    duration: 2,
+    repeat: Infinity,
+    ease: "linear",
+    frameRate: 15
+  }
+
   return (
     <div className="absolute -inset-4 md:-inset-6 rounded-lg overflow-hidden">
       {/* 上のボーダー */}
@@ -13,12 +21,7 @@ const CyberpunkEffect = () => {
           left: ['20%', '50%', '80%'],
           opacity: [0, 1, 0]
         }}
-        transition={{
-          duration: 2,
-          repeat: Infinity,
-          ease: "linear",
-          frameRate: 30
-        }}
+        transition={baseTransition}
       />
       {/* 右のボーダー */}
       <motion.div
@@ -29,11 +32,8 @@ const CyberpunkEffect = () => {
           opacity: [0, 1, 0]
         }}
         transition={{
-          duration: 2,
-          repeat: Infinity,
-          ease: "linear",
-          delay: 0.5,
-          frameRate: 30
+          ...baseTransition,
+          delay: 0.5
         }}
       />
       {/* 下のボーダー */}
@@ -45,11 +45,8 @@ const CyberpunkEffect = () => {
           opacity: [0, 1, 0]
         }}
         transition={{
-          duration: 2,
-          repeat: Infinity,
-          ease: "linear",
-          delay: 1,
-          frameRate: 30
+          ...baseTransition,
+          delay: 1
         }}
       />
       {/* 左のボーダー */}
@@ -61,11 +58,8 @@ const CyberpunkEffect = () => {
           opacity: [0, 1, 0]
         }}
         transition={{
-          duration: 2,
-          repeat: Infinity,
-          ease: "linear",
-          delay: 1.5,
-          frameRate: 30
+          ...baseTransition,
+          delay: 1.5
         }}
       />
       

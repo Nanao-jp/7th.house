@@ -6,6 +6,10 @@ export default {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  future: {
+    removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: true,
+  },
   theme: {
     extend: {
       colors: {
@@ -13,6 +17,9 @@ export default {
         foreground: "var(--foreground)",
       },
     },
+  },
+  experimental: {
+    optimizeUniversalDefaults: true,
   },
   plugins: [],
 } satisfies Config;

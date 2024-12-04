@@ -7,17 +7,23 @@ import JsonLd from '@/components/JsonLd'
 const spaceGrotesk = Space_Grotesk({ 
   subsets: ["latin"],
   variable: '--font-space-grotesk',
+  display: 'swap',
+  preload: true,
 });
 
 const orbitron = Orbitron({ 
   subsets: ["latin"],
   variable: '--font-orbitron',
+  display: 'swap',
+  preload: true,
 });
 
 const mplus = M_PLUS_1({ 
   subsets: ["latin"],
   variable: '--font-mplus',
   weight: ['300', '500', '700'],
+  display: 'swap',
+  preload: true,
 });
 
 export const metadata: Metadata = {

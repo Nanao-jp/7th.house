@@ -7,6 +7,7 @@ const DesignAccents = () => {
   const frameCountRef = useRef(0);
   const animationFrameRef = useRef<number>();
   const isVisibleRef = useRef(true);
+  const lastUpdateTimeRef = useRef(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -14,8 +15,6 @@ const DesignAccents = () => {
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
-
-    let lastUpdateTime = 0;
 
     // 基本的なノードの構造は維持
     interface Node {
@@ -31,14 +30,12 @@ const DesignAccents = () => {
       };
     }
 
-    // 事前定義された色を使用
     const colors = [
       { r: 59, g: 130, b: 246 },  // blue-500
       { r: 139, g: 92, b: 246 },  // purple-500
       { r: 99, g: 102, b: 241 }   // indigo-500
     ];
 
-    // キャンバスのサイズ設定
     const resizeCanvas = () => {
       const container = canvas.parentElement;
       if (container) {
@@ -50,47 +47,28 @@ const DesignAccents = () => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // パードの生成（動きを大きく）
     const nodes: Node[] = Array.from({ length: 15 }, () => ({
       x: Math.random() * canvas.width,
       y: canvas.height * 0.5 + (Math.random() - 0.5) * (canvas.height * 0.4),
-      size: Math.random() * 4 + 6,  // サイズを少し大きく
-      baseAlpha: Math.random() * 0.3 + 0.4,  // 透明度を少し上げる
+      size: Math.random() * 4 + 6,
+      baseAlpha: Math.random() * 0.3 + 0.4,
       breathPhase: Math.random() * Math.PI * 2,
       colorIndex: Math.floor(Math.random() * colors.length),
       velocity: {
-        x: (Math.random() - 0.5) * 0.5,  // X軸の動きを大きく
-        y: (Math.random() - 0.5) * 0.2    // Y軸の動きも大きく
+        x: (Math.random() - 0.5) * 0.5,
+        y: (Math.random() - 0.5) * 0.2
       }
     }));
 
-    // Intersection Observerの設定（デバッグログを追加）
+    // Intersection Observerの最適化
     const observer = new IntersectionObserver(
       (entries) => {
-        console.log('Intersection Observer Debug:', {
-          isIntersecting: entries[0].isIntersecting,
-          boundingClientRect: entries[0].boundingClientRect,
-          intersectionRatio: entries[0].intersectionRatio,
-          time: new Date().toISOString(),
-          elementSize: {
-            width: canvas.width,
-            height: canvas.height
-          },
-          parentElement: canvas.parentElement ? {
-            offsetWidth: canvas.parentElement.offsetWidth,
-            offsetHeight: canvas.parentElement.offsetHeight,
-            className: canvas.parentElement.className
-          } : null
-        });
-
         isVisibleRef.current = entries[0].isIntersecting;
         if (isVisibleRef.current) {
-          console.log('🟢 Element is visible - Starting animation');
           if (!animationFrameRef.current) {
-            animate(0);
+            animate(performance.now());
           }
         } else {
-          console.log('🔴 Element is not visible - Stopping animation');
           if (animationFrameRef.current) {
             cancelAnimationFrame(animationFrameRef.current);
             animationFrameRef.current = undefined;
@@ -99,42 +77,22 @@ const DesignAccents = () => {
       },
       { 
         threshold: 0,
-        // rootMarginを100%に変更して判定範囲を広げる
-        rootMargin: '100% 0px'
+        rootMargin: '50px'
       }
     );
 
-    // 要素の初期状態をログ
-    console.log('Initial Canvas State:', {
-      canvas: {
-        width: canvas.width,
-        height: canvas.height,
-        className: canvas.className,
-        style: canvas.style,
-        getBoundingClientRect: canvas.getBoundingClientRect()
-      },
-      parent: canvas.parentElement ? {
-        className: canvas.parentElement.className,
-        style: canvas.parentElement.style,
-        getBoundingClientRect: canvas.parentElement.getBoundingClientRect()
-      } : null
-    });
-
     observer.observe(canvas);
 
-    // 更新処理の最適化
     const updateNodes = (time: number) => {
       nodes.forEach(node => {
         node.x += node.velocity.x;
         node.y += node.velocity.y;
-        node.breathPhase += 0.03;  // 呼吸アニメーションを速く
+        node.breathPhase += 0.03;
 
-        // 画面端での処理
         if (node.x < 0 || node.x > canvas.width) {
           node.velocity.x *= -1;
         }
 
-        // Y軸の制限
         const centerY = canvas.height * 0.5;
         const maxDistance = canvas.height * 0.35;
         if (Math.abs(node.y - centerY) > maxDistance) {
@@ -144,16 +102,14 @@ const DesignAccents = () => {
       });
     };
 
-    // 描画の最適化（接続線の距離を調整）
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // ノード間の接続を描画
       nodes.forEach((node, i) => {
         nodes.slice(i + 1).forEach(otherNode => {
           const distance = Math.hypot(node.x - otherNode.x, node.y - otherNode.y);
-          if (distance < 150) {  // 接続距離を増やす
-            const alpha = (1 - distance / 150) * 0.3;  // 透明度も調整
+          if (distance < 150) {
+            const alpha = (1 - distance / 150) * 0.3;
             ctx.beginPath();
             ctx.moveTo(node.x, node.y);
             ctx.lineTo(otherNode.x, otherNode.y);
@@ -164,10 +120,9 @@ const DesignAccents = () => {
         });
       });
 
-      // ノードの描画
       nodes.forEach(node => {
         const color = colors[node.colorIndex];
-        const size = node.size * (1 + Math.sin(node.breathPhase) * 0.2);  // 呼吸の振幅を大きく
+        const size = node.size * (1 + Math.sin(node.breathPhase) * 0.2);
         const alpha = node.baseAlpha;
 
         ctx.beginPath();
@@ -177,29 +132,31 @@ const DesignAccents = () => {
       });
     };
 
-    // アニメーションループの最適化
+    // FPS制御の最適化
     const animate = (time: number) => {
       if (!isVisibleRef.current) return;
 
-      const deltaTime = time - lastUpdateTime;
-      
-      // 約30FPSの制限（33.33ms）
-      if (deltaTime >= 33) {
-        lastUpdateTime = time;
-        updateNodes(time);
-        draw();
+      const targetFPS = 24;
+      const frameInterval = 1000 / targetFPS;
+      const deltaTime = time - lastUpdateTimeRef.current;
+
+      if (deltaTime < frameInterval) {
+        animationFrameRef.current = requestAnimationFrame(animate);
+        return;
       }
-      
+
+      lastUpdateTimeRef.current = time - (deltaTime % frameInterval);
+      updateNodes(time);
+      draw();
+
       animationFrameRef.current = requestAnimationFrame(animate);
     };
 
-    // 初期アニメーション開始
     if (isVisibleRef.current) {
-      lastUpdateTime = performance.now();
-      animate(lastUpdateTime);
+      lastUpdateTimeRef.current = performance.now();
+      animate(lastUpdateTimeRef.current);
     }
 
-    // クリーンアップ
     return () => {
       observer.disconnect();
       window.removeEventListener('resize', resizeCanvas);
@@ -216,6 +173,6 @@ const DesignAccents = () => {
       style={{ background: 'transparent' }}
     />
   );
-};
+}
 
 export default DesignAccents; 
