@@ -2,9 +2,7 @@ import { motion } from 'framer-motion';
 import { fadeInUp } from '@/constants/animations';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useState } from 'react';
-import emailjs from '@emailjs/browser';
-// Supabaseのインポートを一時的にコメントアウト
-// import { supabase } from '@/lib/supabase';
+import type { EmailJSResponseStatus } from '@emailjs/browser';
 import ContactInfo from './ContactInfo';
 import FormInput from './FormInput';
 import Toast from '@/components/ui/Toast';
@@ -13,6 +11,12 @@ import Toast from '@/components/ui/Toast';
 const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || '';
 const EMAILJS_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || '';
 const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || '';
+
+// EmailJSを遅延ロード
+const loadEmailJS = async () => {
+  const emailjs = await import('@emailjs/browser');
+  return emailjs.default;
+};
 
 // 送信状態の型定義
 type SubmitStatus = 'idle' | 'submitting' | 'success' | 'error';
@@ -59,27 +63,14 @@ const ContactForm = () => {
         message: data.message,
       };
 
-      // メール送信のみ実行
+      // EmailJSを動的にロードして使用
+      const emailjs = await loadEmailJS();
       await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
         templateParams,
         EMAILJS_PUBLIC_KEY
       );
-
-      /* Supabaseへのデータ保存は一時的にコメントアウト
-      await supabase.from('inquiries').insert([
-        {
-          inquiry_type: data.inquiryType,
-          inquiry_type_label: inquiryTypeLabel,
-          name: data.name,
-          email: data.email,
-          message: data.message,
-          status: 'new',
-          created_at: new Date().toISOString(),
-        }
-      ]);
-      */
 
       setSubmitStatus('success');
       setToastVisible(true);

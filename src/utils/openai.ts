@@ -1,8 +1,16 @@
 import OpenAI from 'openai';
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+// クライアントを遅延初期化
+let openaiClient: OpenAI | null = null;
+
+const getOpenAIClient = () => {
+  if (!openaiClient) {
+    openaiClient = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
+  }
+  return openaiClient;
+};
 
 type ProposalRequest = {
   industry: string;
@@ -66,6 +74,7 @@ export async function generateProposal(
 
     try {
       console.log('Calling OpenAI API...');
+      const openai = getOpenAIClient();
       const completion = await openai.chat.completions.create({
         messages: [{ role: 'user', content: prompt }],
         model: 'gpt-3.5-turbo',

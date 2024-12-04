@@ -1,13 +1,33 @@
 "use client"
 
+import dynamic from 'next/dynamic'
 import Hero from '@/components/Hero'
 import DemoSection from '@/components/DemoSection'
-import Features from '@/components/Features'
-import Process from '@/components/Process'
-import TechAndFlow from '@/components/TechAndFlow'
-import PricingPlans from '@/components/PricingPlans'
-import AboutContact from '@/components/AboutContact'
-import DesignAccents from '@/components/AboutContact/DesignAccents'
+
+// 動的インポートに変更
+const Features = dynamic(() => import('@/components/Features'), {
+  loading: () => <div className="min-h-screen" />
+})
+
+const Process = dynamic(() => import('@/components/Process'), {
+  loading: () => <div className="min-h-screen" />
+})
+
+const TechAndFlow = dynamic(() => import('@/components/TechAndFlow'), {
+  loading: () => <div className="min-h-screen" />
+})
+
+const PricingPlans = dynamic(() => import('@/components/PricingPlans'), {
+  loading: () => <div className="min-h-screen" />
+})
+
+const AboutContact = dynamic(() => import('@/components/AboutContact'), {
+  loading: () => <div className="min-h-screen" />
+})
+
+const DesignAccents = dynamic(() => import('@/components/AboutContact/DesignAccents'), {
+  loading: () => <div className="h-24 relative" />
+})
 
 export default function Home() {
   return (

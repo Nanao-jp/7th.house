@@ -3,7 +3,7 @@
 import { ReactNode } from 'react'
 import { motion, HTMLMotionProps } from 'framer-motion'
 import { twMerge } from 'tailwind-merge'
-import { slideInFromTop } from '@/constants/animations'
+import { fadeInUp, hoverScale } from '@/constants/animations'
 
 interface CardProps extends Omit<HTMLMotionProps<"div">, 'children'> {
   variant?: 'default' | 'feature' | 'tech' | 'interactive' | 'pricing'
@@ -32,27 +32,26 @@ const paddings = {
 const Card = ({ 
   variant = 'default',
   padding = 'medium',
-  className,
-  children,
   withHover = false,
   withBorder = true,
   blur = true,
+  className,
+  children,
   ...props 
 }: CardProps) => {
+  const animations = withHover ? hoverScale : fadeInUp;
+
   return (
-    <motion.div
-      variants={slideInFromTop}
-      initial="initial"
-      animate="animate"
+    <motion.div 
       className={twMerge(
         'rounded-lg',
         variants[variant],
         paddings[padding],
         withBorder && 'border border-white/10',
         blur && 'backdrop-blur-sm',
-        withHover && 'transition-all duration-300 hover:bg-white/10',
         className
       )}
+      {...animations}
       {...props}
     >
       {children}
