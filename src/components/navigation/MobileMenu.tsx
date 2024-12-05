@@ -15,9 +15,30 @@ const MobileMenu = ({ isOpen, links, onLinkClick }: MobileMenuProps) => {
     e.preventDefault()
     if (href === '/') {
       window.scrollTo({ top: 0, behavior: 'smooth' })
+    } else if (href === '#contact') {
+      const element = document.querySelector('#contact-title')
+      if (element) {
+        const headerOffset = 100
+        const elementPosition = element.getBoundingClientRect().top
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        })
+      }
     } else {
       const element = document.querySelector(href)
-      element?.scrollIntoView({ behavior: 'smooth' })
+      if (element) {
+        const headerOffset = 100
+        const elementPosition = element.getBoundingClientRect().top
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        })
+      }
     }
     onLinkClick()
   }

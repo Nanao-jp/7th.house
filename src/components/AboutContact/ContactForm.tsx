@@ -104,7 +104,7 @@ const ContactForm = () => {
   // トースト通知のメッセージを取得
   const getToastMessage = () => {
     if (submitStatus === 'success') {
-      return 'お問い合わせありがとうございます。自動返信メールをお送りしましたので、ご確認ください。内容を確認次第、改めてご連絡させていただきます。';
+      return 'お問い合わせありがとうございます。自動返信メールをお送りしましたので、���確認ください。内容を確認次第、改めてご連絡させていただきます。';
     }
     return '申し訳ありません。送信に失敗しました。時間をおいて再度お試しください。';
   };
@@ -118,7 +118,7 @@ const ContactForm = () => {
         {/* お問い合わせフォーム */}
         <div>
           <div className="text-center md:text-left mb-12">
-            <h3 className="text-2xl font-semibold text-white mb-4">お問い合わせ</h3>
+            <h3 id="contact-title" className="text-2xl font-semibold text-white mb-4">お問い合わせ</h3>
             <p className="text-gray-300">
               お気軽にご相談ください。プロジェクトの規模や予算に関わらず、最適なソリューションをご提案いたします。
             </p>

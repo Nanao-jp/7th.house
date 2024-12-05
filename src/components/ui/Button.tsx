@@ -9,6 +9,9 @@ interface ButtonProps extends Omit<HTMLMotionProps<"button">, 'children'> {
   variant?: 'primary' | 'secondary' | 'outline' | 'gradient'
   children?: ReactNode
   href?: string
+  ariaLabel?: string
+  ariaExpanded?: boolean
+  ariaPressed?: boolean
 }
 
 const variantStyles = {
@@ -23,6 +26,9 @@ const Button = ({
   className, 
   variant = 'primary',
   href,
+  ariaLabel,
+  ariaExpanded,
+  ariaPressed,
   ...props 
 }: ButtonProps) => {
   const Component = href ? motion.a : motion.button
@@ -35,6 +41,9 @@ const Button = ({
       whileHover="hover"
       whileTap={{ scale: 0.98 }}
       transition={transition}
+      aria-label={ariaLabel}
+      aria-expanded={ariaExpanded}
+      aria-pressed={ariaPressed}
       className={twMerge(
         'font-medium transition-colors inline-flex items-center justify-center',
         variantStyles[variant],

@@ -38,11 +38,13 @@ const Navbar = () => {
           <DesktopMenu links={navigationLinks} />
           
           <AnimatePresence>
-            <MobileMenu 
-              isOpen={isOpen} 
-              links={navigationLinks} 
-              onLinkClick={() => setIsOpen(false)} 
-            />
+            {isOpen && (
+              <MobileMenu 
+                isOpen={isOpen} 
+                links={navigationLinks} 
+                onLinkClick={() => setIsOpen(false)} 
+              />
+            )}
           </AnimatePresence>
         </motion.div>
       </Container>

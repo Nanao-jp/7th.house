@@ -14,6 +14,21 @@ interface PricingCardProps {
 const PricingCard = ({ plan, index }: PricingCardProps) => {
   const [basePrice, additionalPrice] = plan.price.split('～')
 
+  const handleContactClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    const element = document.querySelector('#contact-title')
+    if (element) {
+      const headerOffset = 100
+      const elementPosition = element.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
+    }
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -73,6 +88,7 @@ const PricingCard = ({ plan, index }: PricingCardProps) => {
             href="#contact"
             variant="gradient"
             className="w-full py-3"
+            onClick={handleContactClick}
           >
             お問い合わせ
           </Button>

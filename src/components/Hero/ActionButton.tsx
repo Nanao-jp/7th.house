@@ -17,6 +17,7 @@ const ActionButton = () => {
       variant="gradient"
       className="px-8 py-4 sm:px-10 sm:py-5 text-base sm:text-lg font-medium"
       onClick={handleClick}
+      ariaLabel="デモセクションへスクロール"
     >
       <span>AIの実力を体験する</span>
       <svg
