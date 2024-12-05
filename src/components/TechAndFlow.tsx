@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { fadeInUp, staggerChildren } from '@/constants/animations';
 import Section from '@/components/ui/Section';
-import Card from '@/components/ui/Card';
+import LazyCard from '@/components/ui/LazyCard';
 import { Background } from './TechStack/Background';
 import { technologies } from '@/constants/techData';
 import { flowSteps } from '@/constants/flowData';
@@ -38,18 +38,14 @@ const TechAndFlow = () => {
             >
               使用技術
             </motion.h3>
-            <motion.div 
-              {...staggerChildren()}
-              className="grid md:grid-cols-3 gap-8"
-            >
+            <div className="grid md:grid-cols-3 gap-8">
               {technologies.map((category, index) => (
-                <Card
+                <LazyCard
                   key={index}
                   variant="tech"
                   withHover
                   padding="large"
-                  {...fadeInUp}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  index={index}
                 >
                   <h3 className="text-2xl font-semibold text-white mb-4">{category.category}</h3>
                   <p className="text-gray-400 mb-8">{category.description}</p>
@@ -77,9 +73,9 @@ const TechAndFlow = () => {
                       );
                     })}
                   </motion.div>
-                </Card>
+                </LazyCard>
               ))}
-            </motion.div>
+            </div>
           </div>
 
           {/* Flow Section */}
@@ -94,55 +90,42 @@ const TechAndFlow = () => {
               {flowSteps.map((step, index) => {
                 const Icon = step.icon;
                 return (
-                  <motion.div
+                  <LazyCard
                     key={step.id}
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ 
-                      once: true,
-                      margin: "10%",
-                      amount: 0.3
-                    }}
-                    transition={{ 
-                      duration: 0.3,
-                      delay: index * 0.05
-                    }}
+                    variant="tech"
+                    withHover
+                    padding="large"
+                    index={index}
                   >
-                    <Card
-                      variant="tech"
-                      withHover
-                      padding="large"
-                    >
-                      <div className="flex flex-col md:flex-row items-start gap-6">
-                        <div className="flex-shrink-0">
-                          <div className="p-4 rounded-lg bg-gradient-to-r from-blue-500/20 to-purple-500/20">
-                            <Icon className="w-8 h-8 text-blue-400/80" />
-                          </div>
+                    <div className="flex flex-col md:flex-row items-start gap-6">
+                      <div className="flex-shrink-0">
+                        <div className="p-4 rounded-lg bg-gradient-to-r from-blue-500/20 to-purple-500/20">
+                          <Icon className="w-8 h-8 text-blue-400/80" />
                         </div>
-                        <div className="flex-grow space-y-4">
-                          <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-                            <h3 className="text-xl font-semibold text-white">
-                              {step.id}. {step.title}
-                            </h3>
-                            <span className="text-blue-400 font-semibold mt-1 md:mt-0">
-                              目安期間: {step.duration}
-                            </span>
+                      </div>
+                      <div className="flex-grow space-y-4">
+                        <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+                          <h3 className="text-xl font-semibold text-white">
+                            {step.id}. {step.title}
+                          </h3>
+                          <span className="text-blue-400 font-semibold mt-1 md:mt-0">
+                            目安期間: {step.duration}
+                          </span>
+                        </div>
+                        <p className="text-gray-400">{step.description}</p>
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div className="rounded-lg bg-blue-500/10 p-4">
+                            <h4 className="text-blue-400 font-semibold mb-2">AIの役割</h4>
+                            <p className="text-gray-300 text-sm leading-relaxed">{step.aiRole}</p>
                           </div>
-                          <p className="text-gray-400">{step.description}</p>
-                          <div className="grid md:grid-cols-2 gap-4">
-                            <div className="rounded-lg bg-blue-500/10 p-4">
-                              <h4 className="text-blue-400 font-semibold mb-2">AIの役割</h4>
-                              <p className="text-gray-300 text-sm leading-relaxed">{step.aiRole}</p>
-                            </div>
-                            <div className="rounded-lg bg-purple-500/10 p-4">
-                              <h4 className="text-purple-400 font-semibold mb-2">人間の役割</h4>
-                              <p className="text-gray-300 text-sm leading-relaxed">{step.humanRole}</p>
-                            </div>
+                          <div className="rounded-lg bg-purple-500/10 p-4">
+                            <h4 className="text-purple-400 font-semibold mb-2">人間の役割</h4>
+                            <p className="text-gray-300 text-sm leading-relaxed">{step.humanRole}</p>
                           </div>
                         </div>
                       </div>
-                    </Card>
-                  </motion.div>
+                    </div>
+                  </LazyCard>
                 );
               })}
             </div>
