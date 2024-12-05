@@ -8,20 +8,20 @@ const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: '--font-space-grotesk',
   display: 'swap',
-  preload: true,
+  preload: false,
 });
 
 const orbitron = Orbitron({ 
   subsets: ["latin"],
   variable: '--font-orbitron',
   display: 'swap',
-  preload: true,
+  preload: false,
 });
 
 const mplus = M_PLUS_1({ 
   subsets: ["latin"],
   variable: '--font-mplus',
-  weight: ['300', '500', '700'],
+  weight: ['400', '700'],
   display: 'swap',
   preload: true,
 });
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "7th.House | AIと共に創る次世代のWeb開発",
-    description: "最新技術を活用したWeb開発サービスを提供。スピーディーな開発、データに基づく提案、柔軟なカスタマイズで、あなたのビジネスをサポートします。",
+    description: "最新技術を活用したWeb開発サービスを提供。スピーディーな開発、データに基づく提案、柔軟なカスタマイズで、���なたのビジネスをサポートします。",
     type: "website",
     url: 'https://7th-house.net',
     siteName: "7th.House",
