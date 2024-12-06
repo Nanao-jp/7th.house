@@ -1,17 +1,16 @@
 "use client"
 
 import { ReactNode } from 'react'
-import { motion, HTMLMotionProps } from 'framer-motion'
 import { twMerge } from 'tailwind-merge'
-import { fadeInUp, hoverScale } from '@/constants/animations'
 
-interface CardProps extends Omit<HTMLMotionProps<"div">, 'children'> {
+interface CardProps {
   variant?: 'default' | 'feature' | 'tech' | 'interactive' | 'pricing'
   padding?: 'none' | 'small' | 'medium' | 'large'
   children?: ReactNode
   withHover?: boolean
   withBorder?: boolean
   blur?: boolean
+  className?: string
 }
 
 const variants = {
@@ -37,25 +36,21 @@ const Card = ({
   blur = true,
   className,
   children,
-  ...props 
 }: CardProps) => {
-  const animations = withHover ? hoverScale : fadeInUp;
-
   return (
-    <motion.div 
+    <div 
       className={twMerge(
         'rounded-lg',
         variants[variant],
         paddings[padding],
         withBorder && 'border border-white/10',
         blur && 'backdrop-blur-sm',
+        withHover && 'transition-transform duration-300 hover:scale-[1.02]',
         className
       )}
-      {...animations}
-      {...props}
     >
       {children}
-    </motion.div>
+    </div>
   )
 }
 
