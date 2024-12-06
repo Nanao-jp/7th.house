@@ -22,7 +22,7 @@ const MainContent = () => {
               'AIが導く\n次世代のWeb開発'
             ]}
             wrapper="h1"
-            speed={50}
+            speed={40}
             className="relative inline-block whitespace-pre-line"
             cursor={true}
             repeat={0}
@@ -38,7 +38,7 @@ const MainContent = () => {
               'AIが導く、次世代のWeb開発'
             ]}
             wrapper="h1"
-            speed={50}
+            speed={40}
             className="relative inline-block"
             cursor={true}
             repeat={0}

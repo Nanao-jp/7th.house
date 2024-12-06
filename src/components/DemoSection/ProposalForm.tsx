@@ -33,7 +33,7 @@ interface ProposalFormProps {
 }
 
 const industries: Industry[] = [
-  '飲食店', '��パレル', '美容院', '不動産', '教育',
+  '飲食店', 'アパレル', '美容院', '不動産', '教育',
   'フィットネス', '医療機関', 'コンサルティング'
 ];
 
@@ -77,7 +77,7 @@ export const ProposalForm: React.FC<ProposalFormProps> = ({
         {/* 特徴選択 */}
         <div className="space-y-3">
           <label className="block text-white text-sm font-medium mb-4">
-            必要���機能（複数選択可）
+            必要な機能（複数選択可）
             <span className="text-red-500 ml-1">*</span>
           </label>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
