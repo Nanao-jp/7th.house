@@ -14,15 +14,21 @@ const quickTransition = {
   ease: [0.25, 0.1, 0.25, 1],
 } as const;
 
+// transform用の共通設定
+const transformConfig = {
+  type: "tween",
+  duration: 0.2,
+  ease: [0.25, 0.1, 0.25, 1],
+} as const;
+
 // 基本的なフェードインアニメーション（最適化）
 export const fadeIn: Variants = {
   initial: { opacity: 0 },
   animate: { 
     opacity: 1,
     transition: {
-      type: "tween",
-      duration: 0.3,
-      ease: [0.25, 0.1, 0.25, 1]
+      ...baseTransition,
+      opacity: { duration: 0.3 }
     }
   }
 };
@@ -37,9 +43,9 @@ export const fadeInUp: Variants = {
     opacity: 1,
     y: 0,
     transition: {
-      type: "tween",
-      duration: 0.3,
-      ease: [0.25, 0.1, 0.25, 1]
+      ...baseTransition,
+      opacity: { duration: 0.3 },
+      transform: transformConfig
     }
   }
 };
@@ -54,9 +60,9 @@ export const fadeInLeft: Variants = {
     opacity: 1,
     x: 0,
     transition: {
-      type: "tween",
-      duration: 0.3,
-      ease: [0.25, 0.1, 0.25, 1]
+      ...baseTransition,
+      opacity: { duration: 0.3 },
+      transform: transformConfig
     }
   }
 };
@@ -84,9 +90,9 @@ export const staggerItem: Variants = {
     opacity: 1,
     y: 0,
     transition: {
-      type: "tween",
-      duration: 0.2,
-      ease: [0.25, 0.1, 0.25, 1]
+      ...quickTransition,
+      opacity: { duration: 0.2 },
+      transform: transformConfig
     }
   }
 };
@@ -97,9 +103,8 @@ export const hoverScale: Variants = {
   hover: { 
     scale: 1.02,
     transition: {
-      type: "tween",
-      duration: 0.2,
-      ease: [0.25, 0.1, 0.25, 1]
+      ...quickTransition,
+      transform: transformConfig
     }
   }
 };
@@ -110,9 +115,8 @@ export const hoverLift: Variants = {
   hover: { 
     y: -2,
     transition: {
-      type: "tween",
-      duration: 0.2,
-      ease: [0.25, 0.1, 0.25, 1]
+      ...quickTransition,
+      transform: transformConfig
     }
   }
 }; 
