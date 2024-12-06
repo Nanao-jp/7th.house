@@ -9,7 +9,7 @@ const HamburgerButton = ({ isOpen, onClick }: HamburgerButtonProps) => {
   return (
     <button 
       onClick={onClick}
-      className="absolute right-0 top-1/2 -translate-y-1/2 p-2 md:hidden"
+      className="absolute right-0 top-1/2 -translate-y-1/2 p-4 md:hidden z-50"
       aria-label="メインメニュー"
       aria-expanded={isOpen}
       aria-controls="mobile-menu"

@@ -1,0 +1,3 @@
+[33m7393f06[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m  パフォーマンス最適化: アニメーションとビルド設定の改善
+[33mb3d9931[m refactor: アニメーションの二重適用を解消し、Card/LazyCardの責務を明確化
+[33m3a41173[m refactor: アニメーションの二重適用を解消し、Card/LazyCardの責務を明確化

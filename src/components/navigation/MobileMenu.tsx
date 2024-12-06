@@ -7,7 +7,7 @@ import type { NavigationLink, NavigationLinks } from '@/types/navigation'
 interface MobileMenuProps {
   isOpen: boolean
   links: NavigationLinks
-  onLinkClick: () => void
+  onLinkClick?: () => void
 }
 
 const MobileMenu = ({ isOpen, links, onLinkClick }: MobileMenuProps) => {
@@ -40,7 +40,6 @@ const MobileMenu = ({ isOpen, links, onLinkClick }: MobileMenuProps) => {
         })
       }
     }
-    onLinkClick()
   }
 
   return (

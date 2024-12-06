@@ -1,7 +1,7 @@
 "use client"
 
 import { motion, AnimatePresence } from 'framer-motion'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { navigationLinks } from '@/constants/navigation'
 import Container from '@/components/ui/Container'
 import { slideInFromTop } from '@/constants/animations'
@@ -12,6 +12,25 @@ import DesktopMenu from './DesktopMenu'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const menuRef = useRef<HTMLDivElement>(null)
+  const buttonRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (isOpen && 
+          menuRef.current && 
+          buttonRef.current && 
+          !menuRef.current.contains(event.target as Node) && 
+          !buttonRef.current.contains(event.target as Node)) {
+        setIsOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isOpen])
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -33,17 +52,20 @@ const Navbar = () => {
           animate="animate"
           className="flex flex-col md:flex-row md:justify-between items-center relative"
         >
-          <HamburgerButton isOpen={isOpen} onClick={toggleMenu} />
+          <div ref={buttonRef}>
+            <HamburgerButton isOpen={isOpen} onClick={toggleMenu} />
+          </div>
           <Logo onClick={scrollToTop} />
           <DesktopMenu links={navigationLinks} />
           
           <AnimatePresence>
             {isOpen && (
-              <MobileMenu 
-                isOpen={isOpen} 
-                links={navigationLinks} 
-                onLinkClick={() => setIsOpen(false)} 
-              />
+              <div ref={menuRef}>
+                <MobileMenu 
+                  isOpen={isOpen} 
+                  links={navigationLinks}
+                />
+              </div>
             )}
           </AnimatePresence>
         </motion.div>
