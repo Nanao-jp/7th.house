@@ -1,11 +1,12 @@
 import { ReactNode } from 'react'
-import { motion, HTMLMotionProps } from 'framer-motion'
-import { twMerge } from 'tailwind-merge'
+import { motion } from 'framer-motion'
 import { fadeIn } from '@/constants/animations'
-import Container from './Container'
+import { viewportConfig } from '@/constants/viewport'
+import { twMerge } from 'tailwind-merge'
 
-interface SectionProps extends Omit<HTMLMotionProps<"section">, 'children'> {
-  children?: ReactNode
+interface SectionProps {
+  children: ReactNode
+  className?: string
   id?: string
   disableDefaultBackground?: boolean
   fullWidth?: boolean
@@ -13,30 +14,28 @@ interface SectionProps extends Omit<HTMLMotionProps<"section">, 'children'> {
 
 const Section = ({ 
   children, 
-  className, 
-  id, 
+  className,
+  id,
   disableDefaultBackground = false,
-  fullWidth = false,
-  ...props 
+  fullWidth = false
 }: SectionProps) => {
-  const content = fullWidth ? children : <Container>{children}</Container>;
-
   return (
-    <motion.section
-      id={id}
-      variants={fadeIn}
-      initial="initial"
-      whileInView="animate"
-      viewport={{ once: true }}
-      className={twMerge(
-        'py-16 relative',
-        disableDefaultBackground && 'bg-transparent',
-        className
-      )}
-      {...props}
-    >
-      {content}
-    </motion.section>
+    <section id={id} className={twMerge(
+      'relative',
+      !disableDefaultBackground && 'bg-gray-900/50',
+      className
+    )}>
+      <motion.div 
+        variants={fadeIn}
+        viewport={viewportConfig}
+        className={twMerge(
+          'mx-auto',
+          !fullWidth && 'max-w-6xl px-4'
+        )}
+      >
+        {children}
+      </motion.div>
+    </section>
   )
 }
 

@@ -1,49 +1,51 @@
 "use client"
 
-import { HTMLAttributes, ReactNode } from 'react'
-import { motion, HTMLMotionProps } from 'framer-motion'
+import { ReactNode } from 'react'
+import { motion } from 'framer-motion'
 import { twMerge } from 'tailwind-merge'
+import { XMarkIcon } from '@heroicons/react/24/outline'
 import { fadeIn } from '@/constants/animations'
+import { viewportConfig } from '@/constants/viewport'
 
-interface AlertProps extends Omit<HTMLMotionProps<"div">, 'children'> {
+interface AlertProps {
+  children: ReactNode
   variant?: 'info' | 'success' | 'warning' | 'error'
-  title?: string
-  children?: ReactNode
+  className?: string
+  onClose?: () => void
 }
 
 const variants = {
-  info: 'bg-blue-500/10 border-blue-500 text-blue-200',
-  success: 'bg-green-500/10 border-green-500 text-green-200',
-  warning: 'bg-yellow-500/10 border-yellow-500 text-yellow-200',
-  error: 'bg-red-500/10 border-red-500 text-red-200',
+  info: 'bg-blue-500/10 text-blue-200 border-blue-500/20',
+  success: 'bg-green-500/10 text-green-200 border-green-500/20',
+  warning: 'bg-yellow-500/10 text-yellow-200 border-yellow-500/20',
+  error: 'bg-red-500/10 text-red-200 border-red-500/20'
 }
 
 const Alert = ({ 
+  children, 
   variant = 'info',
-  title,
   className,
-  children,
-  ...props 
+  onClose 
 }: AlertProps) => {
   return (
     <motion.div
       variants={fadeIn}
-      initial="initial"
-      animate="animate"
+      viewport={viewportConfig}
       className={twMerge(
-        'p-4 rounded-lg border backdrop-blur-sm',
+        'relative rounded-lg border p-4',
         variants[variant],
         className
       )}
-      role="alert"
-      {...props}
     >
-      {title && (
-        <h4 className="font-semibold mb-2">{title}</h4>
+      {children}
+      {onClose && (
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-current opacity-50 hover:opacity-100 transition-opacity"
+        >
+          <XMarkIcon className="w-5 h-5" />
+        </button>
       )}
-      <div className="text-sm opacity-90">
-        {children}
-      </div>
     </motion.div>
   )
 }

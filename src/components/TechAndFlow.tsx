@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { fadeInUp, staggerChildren, staggerItem } from '@/constants/animations';
+import { viewportConfig } from '@/constants/viewport';
 import Section from '@/components/ui/Section';
 import LazyCard from '@/components/ui/LazyCard';
 import { Background } from './TechStack/Background';
@@ -20,6 +21,7 @@ const TechAndFlow = () => {
         <div className="relative z-10 max-w-6xl mx-auto px-4">
           <motion.div
             {...fadeInUp}
+            viewport={viewportConfig}
             className="text-center mb-16"
           >
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight">
@@ -34,13 +36,16 @@ const TechAndFlow = () => {
           <div className="mb-20">
             <motion.h3
               {...fadeInUp}
+              viewport={viewportConfig}
               className="text-3xl font-bold text-white mb-8 text-center"
             >
               使用技術
             </motion.h3>
             <motion.div 
               {...staggerChildren()}
+              viewport={viewportConfig}
               className="grid md:grid-cols-3 gap-8"
+              style={{ willChange: 'opacity' }}
             >
               {technologies.map((category, index) => (
                 <LazyCard
@@ -50,12 +55,17 @@ const TechAndFlow = () => {
                   padding="large"
                   index={index}
                 >
-                  <motion.div {...staggerItem}>
+                  <motion.div 
+                    {...staggerItem}
+                    viewport={viewportConfig}
+                    style={{ willChange: 'transform, opacity' }}
+                  >
                     <h3 className="text-2xl font-semibold text-white mb-4">{category.category}</h3>
                     <p className="text-gray-400 mb-8">{category.description}</p>
                     
                     <motion.div 
                       {...staggerChildren(0.03)}
+                      viewport={viewportConfig}
                       className="space-y-6"
                     >
                       {category.techs.map((tech, techIndex) => {
@@ -64,6 +74,7 @@ const TechAndFlow = () => {
                           <motion.div
                             key={techIndex}
                             {...staggerItem}
+                            viewport={viewportConfig}
                             className="flex items-start gap-4 group"
                           >
                             <div className="p-2 rounded-lg bg-gradient-to-r from-blue-500/20 to-purple-500/20 group-hover:from-blue-500/30 group-hover:to-purple-500/30 transition-all duration-300">
@@ -87,13 +98,16 @@ const TechAndFlow = () => {
           <div>
             <motion.h3
               {...fadeInUp}
+              viewport={viewportConfig}
               className="text-3xl font-bold text-white mb-8 text-center"
             >
               制作フロー
             </motion.h3>
             <motion.div 
               {...staggerChildren()}
+              viewport={viewportConfig}
               className="grid gap-8"
+              style={{ willChange: 'opacity' }}
             >
               {flowSteps.map((step, index) => {
                 const Icon = step.icon;
@@ -105,7 +119,11 @@ const TechAndFlow = () => {
                     padding="large"
                     index={index}
                   >
-                    <motion.div {...staggerItem}>
+                    <motion.div 
+                      {...staggerItem}
+                      viewport={viewportConfig}
+                      style={{ willChange: 'transform, opacity' }}
+                    >
                       <div className="flex flex-col md:flex-row items-start gap-6">
                         <div className="flex-shrink-0">
                           <div className="p-4 rounded-lg bg-gradient-to-r from-blue-500/20 to-purple-500/20">
