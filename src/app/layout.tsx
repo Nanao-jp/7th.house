@@ -8,7 +8,7 @@ const mplus = M_PLUS_1({
   subsets: ["latin"],
   variable: '--font-mplus',
   weight: ['400', '700'],
-  display: 'optional',
+  display: 'swap',
   preload: true,
   fallback: ['Helvetica', 'Arial', 'sans-serif']
 });
@@ -16,15 +16,15 @@ const mplus = M_PLUS_1({
 const spaceGrotesk = Space_Grotesk({ 
   subsets: ["latin"],
   variable: '--font-space-grotesk',
-  display: 'optional',
-  preload: true,
+  display: 'swap',
+  preload: false,
   fallback: ['Arial', 'sans-serif']
 });
 
 const orbitron = Orbitron({ 
   subsets: ["latin"],
   variable: '--font-orbitron',
-  display: 'optional',
+  display: 'swap',
   preload: false,
   fallback: ['Arial', 'sans-serif']
 });
