@@ -1,3 +1,8 @@
+import { motion } from 'framer-motion';
+import Section from './ui/Section';
+import ContactForm from './ContactForm';
+import CompanyInfo from './CompanyInfo';
+
 const AboutContact = () => {
   return (
     <Section
@@ -28,4 +33,6 @@ const AboutContact = () => {
       </div>
     </Section>
   )
-} 
+}
+
+export default AboutContact; 

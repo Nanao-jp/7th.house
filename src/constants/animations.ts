@@ -119,4 +119,24 @@ export const hoverLift: Variants = {
       transform: transformConfig
     }
   }
-}; 
+};
+
+// 上からスライドインするアニメーション
+export const slideInFromTop: Variants = {
+  initial: { 
+    opacity: 0,
+    y: -20 
+  },
+  animate: { 
+    opacity: 1,
+    y: 0,
+    transition: {
+      ...baseTransition,
+      opacity: { duration: 0.3 },
+      transform: transformConfig
+    }
+  }
+};
+
+// 共通のトランジション設定をエクスポート
+export const transition: Transition = baseTransition; 
