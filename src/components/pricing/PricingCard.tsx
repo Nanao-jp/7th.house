@@ -12,8 +12,6 @@ interface PricingCardProps {
 }
 
 const PricingCard = ({ plan, index }: PricingCardProps) => {
-  const [basePrice, additionalPrice] = plan.price.split('～')
-
   const handleContactClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
     const element = document.querySelector('#contact-title')
@@ -57,15 +55,10 @@ const PricingCard = ({ plan, index }: PricingCardProps) => {
             {plan.name}
           </h3>
           <p className="text-gray-400 mb-4 text-sm md:text-base">{plan.description}</p>
-          <div className="flex flex-col items-center justify-center space-y-1">
+          <div className="flex flex-col items-center justify-center">
             <span className="text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r bg-clip-text text-transparent from-blue-400 to-purple-400">
-              ¥{basePrice}
+              ¥{plan.price}
             </span>
-            {additionalPrice && (
-              <span className="text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r bg-clip-text text-transparent from-blue-400 to-purple-400">
-                ～{additionalPrice}
-              </span>
-            )}
           </div>
         </div>
         <div className="flex-grow mb-8">

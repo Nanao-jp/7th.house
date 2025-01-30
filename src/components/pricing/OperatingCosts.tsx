@@ -24,11 +24,11 @@ const OperatingCosts = () => {
           <div>
             <ul className="mt-2 space-y-2">
               <li>・インフラ費用：2万円（サーバー・ドメイン）</li>
-              <li>・運用費用：1万円（更新・管理）</li>
+              <li>・運用費用：3万円（更新・管理）</li>
             </ul>
           </div>
           <div className="pt-2 border-t border-gray-700">
-            <p>※自社運用の場合は運用費用が不要になります</p>
+            <p>運営管理を任せていただける場合は制作費を割引致します</p>
           </div>
         </div>
       </Card>

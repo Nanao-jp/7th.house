@@ -22,7 +22,7 @@ const ContactInfo = () => {
             <p className="font-medium text-white mb-2">得意分野：</p>
             <ul className="list-disc list-inside space-y-1 ml-2">
               <li>AIを活用したWebアプリケーション開発</li>
-              <li>React/Next.jsでのフロントエンド実装</li>
+              <li>React/Next.jsでのフルスタック開発</li>
               <li>使いやすさを重視したUIデザイン</li>
             </ul>
           </div>
@@ -32,7 +32,7 @@ const ContactInfo = () => {
       <div>
         <h4 className="text-xl font-semibold text-white mb-3">事業内容</h4>
         <ul className="text-gray-300 space-y-2">
-          <li>Webアプリケーション開発</li>
+          <li>web開発</li>
           <li>AI機能の実装・導入支援</li>
           <li>UI/UXデザイン</li>
         </ul>
