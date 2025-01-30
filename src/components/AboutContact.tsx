@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import Section from './ui/Section';
-import ContactForm from './ContactForm';
-import CompanyInfo from './CompanyInfo';
+import ContactForm from './AboutContact/ContactForm';
+import CompanyInfo from './AboutContact/ContactInfo';
 
 const AboutContact = () => {
   return (
